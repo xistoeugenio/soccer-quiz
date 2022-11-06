@@ -1,0 +1,15 @@
+.App {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+    background-color: rgb(20, 70, 121);
+    background-image:
+        repeating-linear-gradient(315deg, #918d9e52 92%, #3700ff00 100%),
+        repeating-linear-gradient(-315deg, #00FFFF2E 92%, #073AFF00 100%),
+
+}

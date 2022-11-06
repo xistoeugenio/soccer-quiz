@@ -1,0 +1,55 @@
+
+.defeat {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 25px;
+
+    .defeatContainer {
+        background-image: url(https://wallpaperheart.com/wp-content/uploads/2018/04/playing-Kevin-De-Bruyne-Images.jpg);
+        background-size: cover;
+        width: 500px;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+
+
+        .containerText {
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+            .defeatText{
+                background-color: rgba(255, 255, 255, 0.774);
+                padding: 5px;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .tryAgainButton {
+        position: absolute;
+        background-color: dodgerblue;
+        width: 150px;
+        height: 50px;
+        font-size: 25px;
+        color: rgb(3, 3, 44);
+        right: calc(50% - 75px);
+        bottom: 10%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(24, 100, 175);
+        }
+    }
+}

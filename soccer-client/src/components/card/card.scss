@@ -1,0 +1,29 @@
+.card {
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+    position: relative;
+    transform-style: preserve-3d;
+    user-select: none;
+    cursor: pointer;
+
+    .cardBack,
+    .cardFront {
+        height: 100%;
+        width: 100%;
+        border-radius: 7px;
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+
+        >* {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    .cardBack {
+        transform: rotateY(180deg);
+    }
+}
