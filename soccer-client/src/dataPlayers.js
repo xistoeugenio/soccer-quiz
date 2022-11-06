@@ -73,3 +73,114 @@ export const dataPlayers = [
          midfield or set up goals with his passing and ball delivery from set-pieces.`
     }
 ]
+
+export const list = [
+    {
+        id: 1,
+        title: "Premier League",
+    },
+    {
+        id: 2,
+        title: "La liga",
+    },
+];
+
+export const leagues = {
+
+    premierLeague: [
+        {
+            id: 1,
+            title: "Arsenal",
+            img: "assets/teamImgs/arsenal.jpg",
+        },
+        {
+            id: 2,
+            title: "Aston Villa",
+            img: "assets/teamImgs/aston.jpg",
+        },
+        {
+            id: 3,
+            title: "Brighton",
+            img: "assets/teamImgs/brighton.jpg",
+        },
+        {
+            id: 5,
+            title: "Chelsea",
+            img: "assets/teamImgs/chelsea.jpg",
+        },
+        {
+            id: 6,
+            title: "Fulham",
+            img: "assets/teamImgs/fulham.jpg",
+        },
+        {
+            id: 7,
+            title: "Liverpool",
+            img: "assets/teamImgs/liverpool.jpg",
+        },
+        {
+            id: 8,
+            title: "Manchester City",
+            img: "assets/teamImgs/city.jpg",
+        },
+        {
+            id: 9,
+            title: "Manchester United",
+            img: "assets/teamImgs/United.jpg",
+        },
+        {
+            id: 10,
+            title: "Newcastle",
+            img: "assets/teamImgs/newcastle.jpg",
+        },
+        {
+            id: 10,
+            title: "Tottenham",
+            img: "assets/teamImgs/tottenham.jpg",
+        },
+        
+    ],
+    LaLiga: [
+        {
+            id: 4,
+            title: "Arsenal",
+            img: "assets/teamImgs/arsenal.jpg",
+        },
+        {
+            id: 4,
+            title: "soccer",
+            img: "assets/soccer.jpg",
+        },
+    ]
+}
+
+export const countries = [
+    {
+        id: 1,
+        title: "Argentina",
+    },
+    {
+        id: 2,
+        title: "Belgium",
+    },
+    {
+        id: 2,
+        title: "Brazil",
+    },
+    {
+        id: 2,
+        title: "England",
+    },
+    {
+        id: 2,
+        title: "France",
+    },
+    {
+        id: 2,
+        title: "Germany",
+    },
+    {
+        id: 2,
+        title: "Portugual",
+    },
+];
