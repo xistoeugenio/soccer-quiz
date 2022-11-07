@@ -81,7 +81,7 @@ export const list = [
     },
     {
         id: 2,
-        title: "La liga",
+        title: "La Liga",
     },
 ];
 
@@ -130,26 +130,36 @@ export const leagues = {
         },
         {
             id: 10,
-            title: "Newcastle",
-            img: "assets/teamImgs/newcastle.jpg",
-        },
-        {
-            id: 10,
             title: "Tottenham",
             img: "assets/teamImgs/tottenham.jpg",
         },
-        
+
     ],
     LaLiga: [
         {
-            id: 4,
-            title: "Arsenal",
-            img: "assets/teamImgs/arsenal.jpg",
+            id: 10,
+            title: "Atletico",
+            img: "assets/atletico.jpg",
         },
         {
-            id: 4,
-            title: "soccer",
-            img: "assets/soccer.jpg",
+            id: 11,
+            title: "Barcelona",
+            img: "assets/teamImgs/barcelona.jpg",
+        },
+        {
+            id: 12,
+            title: "Real Betis",
+            img: "assets/realBetis.jpg",
+        },
+        {
+            id: 13,
+            title: "Real Madrid",
+            img: "assets/realMadrid.jpg",
+        },
+        {
+            id: 14,
+            title: "Real Sociedad",
+            img: "assets/realSociedad.jpg",
         },
     ]
 }
@@ -164,23 +174,88 @@ export const countries = [
         title: "Belgium",
     },
     {
-        id: 2,
+        id: 3,
         title: "Brazil",
     },
     {
-        id: 2,
+        id: 4,
         title: "England",
     },
     {
-        id: 2,
+        id: 5,
         title: "France",
     },
     {
-        id: 2,
+        id: 6,
         title: "Germany",
     },
     {
-        id: 2,
+        id: 7,
         title: "Portugual",
     },
 ];
+
+export const positions = [
+    {
+        id: 1,
+        name: "Goalkeeper",
+        abbreviation: "GK"
+    },
+    {
+        id: 2,
+        name: "Center-back",
+        abbreviation: "CB"
+    },
+    {
+        id: 3,
+        name: "Sweeper",
+        abbreviation: "SW"
+    },
+    {
+        id: 4,
+        name: "Right Full-back",
+        abbreviation: "RB"
+    },
+    {
+        id: 5,
+        name: "Left Full-back",
+        abbreviation: "LB"
+    },
+    {
+        id: 6,
+        name: "Center midfield",
+        abbreviation: "CM"
+    },
+    {
+        id: 7,
+        name: "Defensive midfield",
+        abbreviation: "DM"
+    },
+    {
+        id: 8,
+        name: "Attacking midfield",
+        abbreviation: "AM"
+    },
+    {
+        id: 9,
+        name: "Wide midfield",
+        abbreviation: "RW"
+    },
+    {
+        id: 10,
+        name: "Wingers",
+        abbreviation: "LW"
+    },
+    {
+        id: 11,
+        name: "Center forward",
+        abbreviation: "CF"
+    },
+    {
+        id: 12,
+        name: "Striker",
+        abbreviation: "S"
+    },
+
+
+]

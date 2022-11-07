@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 import playersRoute from "./routes/players.js"
 import usersRoute from "./routes/users.js"
 import authRoutes from "./routes/auth.js"
@@ -22,6 +23,7 @@ mongoose.connection.on("disconnected", () => {
 })
 
 //middlewares
+app.use(cors())
 app.use(express.json())
 
 app.use("/api/players", playersRoute)
