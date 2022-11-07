@@ -1,11 +1,11 @@
 import './frontCard.scss'
 
-export default function FrontCard({ small }) {
+export default function FrontCard({ small, data }) {
     return (
         <div className={small ? "frontCardContainer small" : "frontCardContainer"}>
             <div className='infoContainer'>
                 <div className="imgContainer">
-                    <img src="assets/playerImgs/benzema.jpg" alt="" />
+                    <img src={data.imgPlayer} alt="" />
                 </div>
                 <p className='infoDescription'>
                     Kroos is known for the range and accuracy of his distribution
@@ -13,7 +13,7 @@ export default function FrontCard({ small }) {
                     midfield or set up goals with his passing and ball delivery from set-pieces
                 </p>
                 <p className='infoName'>
-                    Kevin De Bruyne
+                    {data.name}
                 </p>
             </div>
 
