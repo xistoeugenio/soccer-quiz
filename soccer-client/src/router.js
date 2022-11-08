@@ -6,9 +6,16 @@ import SearchResults from "./components/searchResults/SearchResults";
 import Game from "./components/game/Game";
 import "./app.scss";
 
-const PageContainer = () => (
+const InitialPage = () => (
   <section className="PageContainer">
     <Navbar />
+    <MainContainer />
+  </section>
+)
+
+const PlayersPage = () => (
+  <section className="PageContainer">
+    <Navbar searchBar={true}/>
     <MainContainer />
   </section>
 )
@@ -16,13 +23,19 @@ const PageContainer = () => (
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <PageContainer />,
+    element: <InitialPage />,
     children: [
       {
         path: "/",
         element: 
         <Link to="/quiz" className="playButton">Play</Link>,
       },
+    ],
+  },
+  {
+    path: "/players",
+    element: <PlayersPage />,
+    children: [
       {
         path: "/players",
         element: <SearchResults />,
