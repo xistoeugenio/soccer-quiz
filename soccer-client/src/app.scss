@@ -10,6 +10,25 @@
     background-color: rgb(20, 70, 121);
     background-image:
         repeating-linear-gradient(315deg, #918d9e52 92%, #3700ff00 100%),
-        repeating-linear-gradient(-315deg, #00FFFF2E 92%, #073AFF00 100%),
+        repeating-linear-gradient(-315deg, #00FFFF2E 92%, #073AFF00 100%);
 
+
+}
+
+.PageContainer {
+    width: 75%;
+    max-width: 1100px;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .playButton{
+        background-color: aqua;
+        font-size: 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 20px 40px;
+    }
 }

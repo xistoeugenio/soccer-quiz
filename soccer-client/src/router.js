@@ -1,21 +1,40 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Link } from "react-router-dom";
 import AddPlayer from "./components/addPlayer/AddPlayer";
 import MainContainer from "./components/mainContainer/MainContainer";
+import Navbar from "./components/navbar/Navbar";
 import SearchResults from "./components/searchResults/SearchResults";
+import Game from "./components/game/Game";
+import "./app.scss";
+
+const PageContainer = () => (
+  <section className="PageContainer">
+    <Navbar />
+    <MainContainer />
+  </section>
+)
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <PageContainer />,
+    children: [
+      {
         path: "/",
-        element: <MainContainer />,
-        children: [
-            {
-              path: "/players",
-              element: <SearchResults />,
-            },
-          ],
-    },
-    {
-        path: "/add",
-        element: <AddPlayer />
-    }
+        element: 
+        <Link to="/quiz" className="playButton">Play</Link>,
+      },
+      {
+        path: "/players",
+        element: <SearchResults />,
+      },
+    ],
+  },
+  {
+    path: "/add",
+    element: <AddPlayer />
+  },
+  {
+    path: "/quiz",
+    element: <Game />
+  }
 ])
