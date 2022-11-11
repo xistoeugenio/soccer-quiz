@@ -17,7 +17,9 @@ export const SinglePlayerContext = createContext(INITIAL_STATE);
 const SinglePlayerReducer = (state, action) => {
     switch (action.type) {
         case "NEW_PLAYER":
-            return action.payload;
+            return {
+                player: action.payload
+            };
         case "RESET_PLAYER":
             return INITIAL_STATE;
         default:
@@ -26,14 +28,14 @@ const SinglePlayerReducer = (state, action) => {
 };
 
 export const SinglePlayerProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(SinglePlayerReducer, INITIAL_STATE);
+    const [state, dispatchPlayer] = useReducer(SinglePlayerReducer, INITIAL_STATE);
 
 
     return (
         <SinglePlayerContext.Provider
             value={{
                 player: state.player,
-                dispatch,
+                dispatchPlayer,
             }}
         >
             {children}

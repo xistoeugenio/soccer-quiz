@@ -49,11 +49,11 @@ export const singlePlayer = async (req, res, next) => {
 export const verify = async (req, res, next)=>{
     try {
         const answer = req.params.id
-        var response = ""
+        var response = null
         if(answer === currentPlayer.id){
-            response = "right answer"
+            response = "right"
         }else{
-            response = "wrong answer"
+            response = "wrong"
         }
 
         res.status(200).json(response)
