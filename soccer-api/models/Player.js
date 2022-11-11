@@ -29,6 +29,9 @@ const playersSchema = new mongoose.Schema({
     imgPlayer: {
         type: String,
     },
+    id_number:{
+        type: Number
+    }
 },
 { timestamps: true }
 )

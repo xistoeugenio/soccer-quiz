@@ -5,6 +5,7 @@ import cors from "cors";
 import playersRoute from "./routes/players.js"
 import usersRoute from "./routes/users.js"
 import authRoutes from "./routes/auth.js"
+import gameRoute from "./routes/game.js"
 
 const app = express()
 dotenv.config()
@@ -28,6 +29,7 @@ app.use(express.json())
 
 app.use("/api/players", playersRoute)
 app.use("/api/users", usersRoute)
+app.use("/api/game", gameRoute)
 app.use("/api", authRoutes)
 
 
