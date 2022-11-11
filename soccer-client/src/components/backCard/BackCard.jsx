@@ -6,7 +6,7 @@ export default function BackCard() {
     const { player } = useContext(SinglePlayerContext)
 
     const formatData = (value)=>{
-        const withoutSpaces = value.replace(" ", "")
+        const withoutSpaces = value?.replace(" ", "")
         return withoutSpaces
     }
     return (

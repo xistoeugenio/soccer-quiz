@@ -27,24 +27,26 @@ export default function SearchResults() {
 
     return (
         <div className='resultsContainer'>
-            {data.map((item) => (
-                <div className='smallPlayerContainer'
-                    onClick={
-                        () => {
-                            setShowModal(true)
-                            setCurrentPlayer(item._id)
-                        }
-                    }>
-                    <div className='infoContainer'>
-                        <div className="imgContainer">
-                            <img src={item.imgPlayer} alt="" />
+            <div className="playersContainer">
+                {data.map((item) => (
+                    <div className='smallPlayerContainer'
+                        onClick={
+                            () => {
+                                setShowModal(true)
+                                setCurrentPlayer(item._id)
+                            }
+                        }>
+                        <div className='infoContainer'>
+                            <div className="imgContainer">
+                                <img src={item.imgPlayer} alt="" />
+                            </div>
+                            <p className='infoName'>
+                                {item.name}
+                            </p>
                         </div>
-                        <p className='infoName'>
-                            {item.name}
-                        </p>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
             {showModal && <Modal setShowModal={setShowModal} currentPlayer={currentPlayer} />}
         </div>
 

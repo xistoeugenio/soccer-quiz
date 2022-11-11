@@ -15,7 +15,7 @@ export default function Navbar({ searchBar }) {
                     :
                     <>
                         <Link to="/add" className="button">Add Player</Link>
-                        <Link to="/players" className="button">players</Link>
+                        <Link to="/players" className="button">Players</Link>
                     </>
                 }
             </div>

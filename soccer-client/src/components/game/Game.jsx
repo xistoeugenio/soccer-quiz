@@ -1,4 +1,5 @@
-import Card from "../card/Card"
+import BackCard from "../backCard/BackCard"
+import FlippableCard from "../flippableCard/FlippableCard"
 import "./game.scss"
 
 export default function Game() {
@@ -6,7 +7,7 @@ export default function Game() {
     <div className="game">
       <div className="gamerContainer">
         <div className="gamerRight">
-          <Card />
+          <BackCard />
         </div>
         <div className="gamerLeft">
           <div className="playersContainer">
