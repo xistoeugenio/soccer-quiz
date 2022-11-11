@@ -1,11 +1,11 @@
 import Player from "../models/Player.js";
 
 const randomNumber = (number, number2, number3) => {
-    var ranNum = Math.floor(Math.random() * 5 + 1);
+    var ranNum = Math.floor(Math.random() * 20 + 1);
 
     if (number === ranNum || number2 === ranNum || number3 === ranNum) {
         while (number === ranNum || number2 === ranNum || number3 === ranNum) {
-            ranNum = Math.floor(Math.random() * 10 + 1)
+            ranNum = Math.floor(Math.random() * 20 + 1)
         }
     }
 
