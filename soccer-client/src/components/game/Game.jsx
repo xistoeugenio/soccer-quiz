@@ -1,5 +1,6 @@
+import { CircularProgress } from "@mui/material"
 import axios from "axios"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
 import { GameContext } from "../../context/gameContext"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
@@ -11,9 +12,13 @@ export default function Game() {
 
   const { dispatchPlayer, player } = useContext(SinglePlayerContext)
   const { dispatchGame, score, start, options } = useContext(GameContext)
+  const [loading, setLoading] = useState(false)
+  const [loadingOption, setLoadingOption] = useState(false)
+
   console.log(player)
 
   const initGame = async () => {
+    setLoading(true)
     try {
       const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
       const data = response.data
@@ -25,6 +30,7 @@ export default function Game() {
           league: data.league
         }
       })
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -32,6 +38,7 @@ export default function Game() {
   }
 
   const nextQuestion = async () => {
+    setLoadingOption(true)
     try {
       const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
       const data = response.data
@@ -43,6 +50,7 @@ export default function Game() {
           league: data.league
         }
       })
+      setLoadingOption(data && false)
     } catch (error) {
       console.log(error)
     }
@@ -71,6 +79,7 @@ export default function Game() {
   }
 
   const sendQuestion = async (id) => {
+    setLoadingOption(true)
     try {
       const response = await axios.post(process.env.REACT_APP_URL_API + "api/game/" + id)
       verifyQuestion(response.data)
@@ -80,25 +89,35 @@ export default function Game() {
   }
   return (
     <div className="game">
-      {start ?
-        <>
-          <p>{score}</p>
-          <div className="gamerContainer">
-            <div className="gamerRight">
-              <BackCard />
-            </div>
-            <div className="gamerLeft">
-              <div className="playersContainer">
-                {options.map((player) => (
-                  <button className="playerButton" onClick={() => { sendQuestion(player.id) }}>{player.name}</button>
-                ))}
-              </div>
-            </div>
-          </div>
-          <button className="skipButton" onClick={() => { nextQuestion() }}>Skip</button>
-        </>
-        :
-        <Defeat />
+      {
+        loading ?
+          <CircularProgress /> :
+          start ?
+            <>
+              <p>{score}</p>
+                <div className="gamerContainer">
+                  {loadingOption? <CircularProgress />: 
+                  <>
+                  <div className="gamerRight">
+                    <BackCard />
+                  </div>
+                  <div className="gamerLeft">
+
+
+                    <div className="playersContainer">
+                      {options.map((player) => (
+                        <button className="playerButton" onClick={() => { sendQuestion(player.id) }}>{player.name}</button>
+                      ))}
+                    </div>
+
+                  </div>
+                  </>
+                  }
+                </div>
+              <button className="skipButton" onClick={() => { nextQuestion(true) }}>Skip</button>
+            </>
+            :
+            <Defeat />
       }
     </div>
   )
