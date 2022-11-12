@@ -1,14 +1,13 @@
 import axios from "axios"
 import { useRef } from "react"
 import { useContext, useEffect } from "react"
-import { useState } from "react"
 import { GameContext } from "../../context/gameContext"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import BackCard from "../backCard/BackCard"
+import Defeat from "../defeat/Defeat"
 import "./game.scss"
 
 export default function Game() {
-  const [response, setResponse] = useState("")
 
   const { dispatchPlayer, player } = useContext(SinglePlayerContext)
   const { dispatchGame, score, start, options } = useContext(GameContext)
@@ -16,7 +15,7 @@ export default function Game() {
 
   const initGame = async () => {
     try {
-      const response = await axios.get("http://localhost:8800/api/game")
+      const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
       const data = response.data
       dispatchGame({ type: "START_GAME", payload: data.all })
       dispatchPlayer({
@@ -34,7 +33,7 @@ export default function Game() {
 
   const nextQuestion = async () => {
     try {
-      const response = await axios.get("http://localhost:8800/api/game")
+      const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
       const data = response.data
       dispatchGame({ type: "NEW_OPTIONS", payload: data.all })
       dispatchPlayer({
@@ -73,8 +72,7 @@ export default function Game() {
 
   const sendQuestion = async (id) => {
     try {
-      const response = await axios.post("http://localhost:8800/api/game/" + id)
-      setResponse(response.data)
+      const response = await axios.post(process.env.REACT_APP_URL_API + "api/game/" + id)
       verifyQuestion(response.data)
     } catch (error) {
       console.log(error)
@@ -82,7 +80,7 @@ export default function Game() {
   }
   return (
     <div className="game">
-      {start &&
+      {start ?
         <>
           <p>{score}</p>
           <div className="gamerContainer">
@@ -96,10 +94,12 @@ export default function Game() {
                 ))}
               </div>
             </div>
-            <p>{response}</p>
           </div>
           <button className="skipButton" onClick={() => { nextQuestion() }}>Skip</button>
-        </>}
+        </>
+        :
+        <Defeat />
+      }
     </div>
   )
 }

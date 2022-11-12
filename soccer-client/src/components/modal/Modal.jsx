@@ -3,19 +3,18 @@ import FlippableCard from "../flippableCard/FlippableCard"
 import { Close, Delete, Edit } from "@mui/icons-material"
 import { useEffect } from "react"
 import axios from "axios"
-import { useState } from "react"
 import { useContext } from "react"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 
 export default function Modal({ setShowModal, currentPlayer }) {
 
-    const {dispatch} = useContext(SinglePlayerContext)
+    const {dispatchPlayer} = useContext(SinglePlayerContext)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8800/api/players/" + currentPlayer)
-                dispatch({type:"NEW_PLAYER", payload:{player: response.data} })
+                const response = await axios.get(process.env.REACT_APP_URL_API +"api/players/" + currentPlayer)
+                dispatchPlayer({type:"NEW_PLAYER", payload:response.data })
             } catch (error) {
                 console.log(error)
             }

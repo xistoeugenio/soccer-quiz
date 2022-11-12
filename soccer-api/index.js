@@ -46,7 +46,7 @@ app.use((err, req, res, next) => {
 })
 
 
-app.listen(8800, () => {
+app.listen(process.env.PORT || 8800, () => {
     conect()
     console.log("server is running on http://localhost:8800")
 })

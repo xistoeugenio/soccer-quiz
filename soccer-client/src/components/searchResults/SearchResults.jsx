@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import FrontCard from '../frontCard/FrontCard'
 import Modal from '../modal/Modal'
 import './searchResults.scss'
+
 
 export default function SearchResults() {
     const [data, setData] = useState([])
@@ -13,7 +13,7 @@ export default function SearchResults() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8800/api/players")
+                const response = await axios.get(process.env.REACT_APP_URL_API +"api/players")
                 setData(response.data)
             } catch (error) {
                 console.log(error)
@@ -21,8 +21,7 @@ export default function SearchResults() {
         }
         fetchData()
     }, [])
-    console.log(data)
-    console.log(currentPlayer)
+    console.log(process.env.REACT_APP_URL_API)
 
 
     return (
