@@ -1,8 +1,12 @@
+@import "../../global.scss";
+
 .Navbar {
     //background-color: #0000005e;
+    box-sizing: border-box;
     width: 100%;
     height: 10%;
     border-radius: 10px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,7 +17,6 @@
 
     .leftContainer {
         color: white;
-        margin-left: 20px;
         font-size: 28px;
         cursor: default;
     }
@@ -24,6 +27,31 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
+
+        .searchbar {
+            width: 100%;
+            height: 30px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+
+            .searchIcon {
+                font-size: 20px !important;
+                margin-left: 10px;
+
+            }
+
+            .searchInput {
+                border: none;
+                width: 70%;
+
+                &:focus {
+                    outline: none;
+
+                }
+            }
+        }
 
         .button {
             box-sizing: border-box;
@@ -38,11 +66,53 @@
             align-items: center;
             justify-content: center;
 
-            &:hover{
+            &:hover {
                 background: none;
                 color: white;
                 border: 2px solid white;
             }
+
+            @include notebook {
+                width: 40%;
+            }
         }
+
+
+    }
+
+    @include tablet {
+        padding: 0 10px;
+
+        .rightContainer {
+            width: 62%;
+
+            .button {
+                width: 45%;
+            }
+        }
+    }
+
+    @include mobile{
+        justify-content: center;
+        padding: 0 20px;
+
+        .leftContainer{
+            display: none;
+        }
+
+        .rightContainer{
+            width: 100%;
+
+            .searchbar{
+                height: 65%;
+            }
+            .button{
+                width: 40%;
+            }
+        }
+    }
+    
+    @include mobileTurned{
+        height: 18%;
     }
 }

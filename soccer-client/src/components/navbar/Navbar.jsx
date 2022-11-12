@@ -1,16 +1,25 @@
 import { Link } from "react-router-dom"
+import { Search } from '@mui/icons-material';
+
 import "./navbar.scss"
 
 export default function Navbar({ searchBar }) {
     return (
         <div className="Navbar">
             <div className="leftContainer">
-                Players' quiz
+                Socciz
             </div>
             <div className="rightContainer">
                 {searchBar === true ?
                     <>
-                        <input type="text" />
+                        <div className="searchbar">
+                            <Search className="searchIcon"/>
+                            <input 
+                            type="text" 
+                            className="searchInput"
+                            placeholder="Search for a player..."
+                            />
+                        </div>
                     </>
                     :
                     <>
