@@ -1,0 +1,93 @@
+@import "../../global.scss";
+
+
+.skeletonScore {
+    align-self: flex-start;
+    width: 150px;
+    height: 50px;
+    margin-left: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.skeletonGameLeft {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .skeletonCard {
+        width: 80%;
+        height: 90%;
+        border-radius: 7px;
+    }
+}
+
+.skeletonGameRight {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .skeletonPlayersContainer {
+        height: 80%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .skeletonBtPlayer {
+            width: 200px;
+            height: 40px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+}
+
+.skeletonBtSkip {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@include mobile {
+
+
+    .skeletonGameLeft {
+        width: 220px;
+        min-width: 200px;
+        height: 300px;
+        min-height: 288px;
+
+        .skeletonCard {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .skeletonGameRight {
+
+        height: calc(100% - 288px);
+        max-height: 200px;
+
+        .skeletonPlayersContainer {
+            width: 100%;
+            height: 100%;
+            justify-content: space-evenly;
+
+            .skeletonBtPlayer {
+                width: 220px;
+                height: 30px;
+            }
+        }
+    }
+
+}

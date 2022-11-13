@@ -1,4 +1,3 @@
-import { CircularProgress } from "@mui/material"
 import axios from "axios"
 import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
@@ -6,6 +5,7 @@ import { GameContext } from "../../context/gameContext"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import BackCard from "../backCard/BackCard"
 import Defeat from "../defeat/Defeat"
+import SkeletonContainer from "../skeletonContainer/SkeletonContainer"
 import "./game.scss"
 
 export default function Game() {
@@ -113,7 +113,7 @@ export default function Game() {
     <div className="game">
       {
         loading ?
-          <CircularProgress /> :
+          <SkeletonContainer /> :
           start ?
             <>
               <div className="score">
@@ -121,7 +121,7 @@ export default function Game() {
                 <h2>{score}</h2>
               </div>
               <div className="gamerContainer">
-                {loadingOption ? <CircularProgress /> :
+                {loadingOption ? <SkeletonContainer SingleOption /> :
                   <>
                     <div className="gamerLeft">
                       <BackCard />
@@ -140,7 +140,10 @@ export default function Game() {
                   </>
                 }
               </div>
-              <button className="skipButton" onClick={() => { nextQuestion(true) }}>Skip</button>
+              <button
+                disabled={selectedAnswer && true}
+                className="skipButton"
+                onClick={() => { nextQuestion(true) }}>Skip</button>
             </>
             :
             <Defeat />

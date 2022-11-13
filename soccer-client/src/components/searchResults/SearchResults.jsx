@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material'
+import { Skeleton } from '@mui/material'
 import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -29,29 +29,35 @@ export default function SearchResults() {
 
     return (
         <div className='resultsContainer'>
-            {
-                loading ? <CircularProgress /> :
-                    <div className="playersContainer">
-                        {data.map((item) => (
-                            <div className='smallPlayerContainer'
-                                onClick={
-                                    () => {
-                                        setShowModal(true)
-                                        setCurrentPlayer(item._id)
-                                    }
-                                }>
-                                <div className='infoContainer'>
-                                    <div className="imgContainer">
-                                        <img src={item.imgPlayer} alt="" />
-                                    </div>
-                                    <p className='infoName'>
-                                        {item.name}
-                                    </p>
+            <div className="playersContainer">
+                {loading ?
+                    Array(21).fill(0).map((item, i) => (
+                        <Skeleton
+                            key={i}
+                            sx={{ bgcolor: '#8b8181' }}
+                            className="skeleton"
+                            variant='rectangular' />
+                    ))
+                    :
+                    data.map((item) => (
+                        <div className='smallPlayerContainer'
+                            onClick={
+                                () => {
+                                    setShowModal(true)
+                                    setCurrentPlayer(item._id)
+                                }
+                            }>
+                            <div className='infoContainer'>
+                                <div className="imgContainer">
+                                    <img src={item.imgPlayer} alt="" />
                                 </div>
+                                <p className='infoName'>
+                                    {item.name}
+                                </p>
                             </div>
-                        ))}
-                    </div>
-            }
+                        </div>
+                    ))}
+            </div>
             {showModal && <Modal setShowModal={setShowModal} currentPlayer={currentPlayer} />}
         </div>
 
