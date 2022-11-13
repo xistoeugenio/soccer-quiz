@@ -12,7 +12,7 @@ const randomNumber = (number, number2, number3) => {
     return ranNum
 }
 
-const drawAnswer =()=>{
+const drawAnswer = () => {
     var random = Math.floor(Math.random() * 4);
 
     return random
@@ -30,29 +30,29 @@ export const singlePlayer = async (req, res, next) => {
         const forth = await Player.findOne({ "id_number": randomNumber(first.id_number, second.id_number, third.id_number) })
 
         const all = [
-            {name: first.name, id :first.id},
-            {name: second.name, id :second.id},
-            {name: third.name, id :third.id},
-            {name: forth.name, id :forth.id},
+            { name: first.name, id: first.id },
+            { name: second.name, id: second.id },
+            { name: third.name, id: third.id },
+            { name: forth.name, id: forth.id },
         ]
 
 
         currentPlayer = await Player.findById(all[drawAnswer()].id)
-        const {team, country, league, ...others} = currentPlayer
+        const { team, country, league, position, ...others } = currentPlayer
 
-        res.status(200).json({all, team, country, league})
+        res.status(200).json({ all, team, country, league, position })
     } catch (err) {
         next(err)
     }
 }
 
-export const verify = async (req, res, next)=>{
+export const verify = async (req, res, next) => {
     try {
         const answer = req.params.id
         var response = null
-        if(answer === currentPlayer.id){
+        if (answer === currentPlayer.id) {
             response = "right"
-        }else{
+        } else {
             response = "wrong"
         }
 

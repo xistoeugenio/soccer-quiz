@@ -14,6 +14,8 @@ export default function Game() {
   const { dispatchGame, score, start, options } = useContext(GameContext)
   const [loading, setLoading] = useState(false)
   const [loadingOption, setLoadingOption] = useState(false)
+  const [className, setClassName] = useState("playerButton")
+  const [selectedAnswer, setSelectedAnswer] = useState(null)
 
   console.log(player)
 
@@ -27,9 +29,11 @@ export default function Game() {
         type: "NEW_PLAYER", payload: {
           team: data.team,
           country: data.country,
-          league: data.league
+          league: data.league,
+          position: data.position
         }
       })
+      console.log(data)
       setLoading(false)
     } catch (error) {
       console.log(error)
@@ -37,8 +41,14 @@ export default function Game() {
 
   }
 
-  const nextQuestion = async () => {
-    setLoadingOption(true)
+
+  /*the function's job is to change question and the 
+  loading parameter is used when we want a loading page
+  before the change*/
+  const nextQuestion = async (loading) => {
+    if (loading) {
+      setLoadingOption(true)
+    }
     try {
       const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
       const data = response.data
@@ -47,15 +57,19 @@ export default function Game() {
         type: "NEW_PLAYER", payload: {
           team: data.team,
           country: data.country,
-          league: data.league
+          league: data.league,
+          position: data.position
         }
       })
       setLoadingOption(data && false)
+      setSelectedAnswer(null)
     } catch (error) {
       console.log(error)
     }
   }
 
+  /*this part is responsible for executing the "initgame"
+  once when the page is reloaded */
   const render = useRef(true)
   useEffect(() => {
     if (render.current) {
@@ -64,11 +78,15 @@ export default function Game() {
     }
   }, [])
 
+
+  /*checks the response returned from the backend
+  and run the following functions*/
   const verifyQuestion = (value) => {
     switch (value) {
       case "right":
         dispatchGame({ type: "RIGHT_ANSWER" })
         nextQuestion()
+        setClassName("playerButton right")
         break;
       case "wrong":
         dispatchGame({ type: "WRONG_ANSWER" })
@@ -78,8 +96,11 @@ export default function Game() {
     }
   }
 
+
+  /*send a request to backend to check the answer */
   const sendQuestion = async (id) => {
-    setLoadingOption(true)
+    setSelectedAnswer(id)
+    setClassName("playerButton selected")
     try {
       const response = await axios.post(process.env.REACT_APP_URL_API + "api/game/" + id)
       verifyQuestion(response.data)
@@ -87,6 +108,7 @@ export default function Game() {
       console.log(error)
     }
   }
+
   return (
     <div className="game">
       {
@@ -94,26 +116,30 @@ export default function Game() {
           <CircularProgress /> :
           start ?
             <>
-              <p>{score}</p>
-                <div className="gamerContainer">
-                  {loadingOption? <CircularProgress />: 
+              <div className="score">
+                <h1>score</h1>
+                <h2>{score}</h2>
+              </div>
+              <div className="gamerContainer">
+                {loadingOption ? <CircularProgress /> :
                   <>
-                  <div className="gamerRight">
-                    <BackCard />
-                  </div>
-                  <div className="gamerLeft">
-
-
-                    <div className="playersContainer">
-                      {options.map((player) => (
-                        <button className="playerButton" onClick={() => { sendQuestion(player.id) }}>{player.name}</button>
-                      ))}
+                    <div className="gamerLeft">
+                      <BackCard />
                     </div>
+                    <div className="gamerRight">
+                      <div className={selectedAnswer ? "playersContainer clicked" : "playersContainer"}>
+                        {options.map((player) => (
+                          <button
+                            disabled={selectedAnswer && true}
+                            className={selectedAnswer === player.id ? className : "playerButton"}
+                            onClick={() => { sendQuestion(player.id) }}>{player.name}</button>
+                        ))}
+                      </div>
 
-                  </div>
+                    </div>
                   </>
-                  }
-                </div>
+                }
+              </div>
               <button className="skipButton" onClick={() => { nextQuestion(true) }}>Skip</button>
             </>
             :
