@@ -5,18 +5,18 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { useContext } from "react"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
-import { CircularProgress } from "@mui/material"
+import { Skeleton } from "@mui/material"
 
 export default function Modal({ setShowModal, currentPlayer }) {
 
-    const [loading, setLoading]= useState(true)
-    const {dispatchPlayer} = useContext(SinglePlayerContext)
+    const [loading, setLoading] = useState(true)
+    const { dispatchPlayer } = useContext(SinglePlayerContext)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(process.env.REACT_APP_URL_API +"api/players/" + currentPlayer)
-                dispatchPlayer({type:"NEW_PLAYER", payload:response.data })
+                const response = await axios.get(process.env.REACT_APP_URL_API + "api/players/" + currentPlayer)
+                dispatchPlayer({ type: "NEW_PLAYER", payload: response.data })
                 setLoading(false)
             } catch (error) {
                 console.log(error)
@@ -25,13 +25,28 @@ export default function Modal({ setShowModal, currentPlayer }) {
         fetchData()
     }, [currentPlayer])
 
+    const alertMessage = () => {
+        alert("You must be an admin to add, update or delete any data. thank you for understanding!")
+    }
+
     return (
         <div className="modalContainer" >
             <Close className="iconClose" onClick={() => { setShowModal(false) }} />
-            {loading ? <CircularProgress /> :<FlippableCard />}
+            {loading ? 
+           <Skeleton
+           className="skeletonCard"
+           sx={{ bgcolor: '#8b8181' }}
+           variant='rectangular' 
+           />
+             : <FlippableCard />}
             <div className="containerBottom">
-                <Delete className="icon" />
-                <Edit className="icon" />
+                <button className="deleteButton" onClick={() => { alertMessage() }}>
+                    <Delete className="icon" />
+                </button>
+                <button className="editButton" onClick={() => { alertMessage() }}>
+                    <Edit className="icon" />
+                </button>
+
             </div>
         </div>
     )

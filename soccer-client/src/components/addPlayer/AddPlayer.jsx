@@ -46,12 +46,17 @@ export default function AddPlayer() {
 
     }, [selected])
 
+    const alertMessage = () => {
+        alert("You must be an admin to add, update or delete any data. thank you for understanding!")
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             const res = await axios.post("http://localhost:8800/api/players", values)
             console.log(res)
         } catch (error) {
+            alertMessage()
             console.log(error)
         }
 

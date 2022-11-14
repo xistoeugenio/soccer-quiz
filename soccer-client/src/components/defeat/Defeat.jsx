@@ -9,13 +9,13 @@ export default function Defeat() {
             <div className="defeatContainer">
                 <div className='containerText'>
                     <div className='defeatText'>
-                        <span>Voce perdeu :( </span>
+                        <span>Congratulations!</span>
                     </div>
                     <div className='defeatText'>
-                        <span>Acertou {score} vezes</span>
+                        <span>You got it right {score} times.</span>
                     </div>
                     <div className='defeatText'>
-                        <span>Parabens!!!</span>
+                        <span>Good luck next time.</span>
                     </div>
                 </div>
             </div>

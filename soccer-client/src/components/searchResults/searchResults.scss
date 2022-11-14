@@ -24,6 +24,11 @@
         overflow-y: scroll;
         align-items: center;
         justify-content: center;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
 
 

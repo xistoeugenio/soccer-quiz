@@ -1,35 +1,95 @@
-.modalContainer{
+@import "../../global.scss";
+
+.modalContainer {
     background-color: #000000d5;
     position: absolute;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     display: flex;
+    padding: 10px;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    gap: 10px;
 
     .iconClose {
+        background-color: #e91111;
         color: white;
         font-size: 25px;
+        align-self: flex-end;
         border-radius: 5px;
-        background-color: rgb(233, 17, 17);
-        position: absolute;
-        top: 25px;
-        right: 25px;
+        cursor: pointer;
     }
 
-    .containerBottom{
-        background-color: red;
+ 
+    .skeletonCard{
+        height: 400px;
+        width: 240px;
+        border-radius: 7px;
+    }
+    .flippableCardContainer{
+        height: 400px;
+        width: 240px;
+    }
+
+    .containerBottom {
         width: 264px;
         height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-around;
 
-        .icon{
-            background-color: white;
+        button {
             width: 40px;
             height: 40px;
+            border-radius: 5px;
+            border: 2px transparent solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            &.deleteButton {
+                background-color: red;
+                cursor: pointer;
+
+                &:hover{
+                    background: none;
+                    border: 2px solid red;
+
+                    .icon{
+                        color: red;
+                    }
+                }
+            }
+
+            &.editButton {
+                background-color: dodgerblue;
+                cursor: pointer;
+
+                &:hover{
+                    background: none;
+                    border: 2px solid dodgerblue;
+
+                    .icon{
+                        color: dodgerblue;
+                    }
+                }
+            }
+        }
+
+    }
+
+    @include notebook{
+
+        .flippableCardContainer{
+            height: 400px;
+            width: 240px;
         }
     }
 }
