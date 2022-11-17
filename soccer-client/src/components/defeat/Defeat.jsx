@@ -2,6 +2,10 @@ import { useContext } from 'react'
 import { GameContext } from '../../context/gameContext'
 import './defeat.scss'
 
+const reload= ()=>{
+    window.location.reload()
+}
+
 export default function Defeat() {
     const {score} = useContext(GameContext)
     return (
@@ -19,7 +23,6 @@ export default function Defeat() {
                     </div>
                 </div>
             </div>
-        <a href='/quiz' className='tryAgainButton'>Try again</a>
         </div>
     )
 }
