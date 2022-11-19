@@ -5,6 +5,8 @@ import Navbar from "./components/navbar/Navbar";
 import SearchResults from "./components/searchResults/SearchResults";
 import Game from "./components/game/Game";
 import "./app.scss";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 
 const InitialPage = () => (
   <section className="PageContainer">
@@ -49,5 +51,13 @@ export const router = createBrowserRouter([
   {
     path: "/quiz",
     element: <Game />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
   }
 ])
