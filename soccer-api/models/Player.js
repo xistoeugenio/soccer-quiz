@@ -30,7 +30,8 @@ const playersSchema = new mongoose.Schema({
         type: String,
     },
     id_number:{
-        type: Number
+        type: Number,
+        unique: true
     }
 },
 { timestamps: true }

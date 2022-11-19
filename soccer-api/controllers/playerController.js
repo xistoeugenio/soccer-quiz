@@ -1,7 +1,8 @@
 import Player from "../models/Player.js"
 
 export const createPlayer = async (req, res, next) => {
-    const newPlayer = new Player(req.body)
+    const amountPlayers = await Player.find()
+    const newPlayer = new Player({...req.body, id_number : amountPlayers.length + 1})
 
     try {
         const savedPlayer = await newPlayer.save()

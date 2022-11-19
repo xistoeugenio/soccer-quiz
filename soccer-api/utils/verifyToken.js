@@ -46,7 +46,7 @@ export const verifyAdmin = (req, res, next) => {
       if (user.isAdmin) {
         next();
       } else {
-        return next(createError(403, "You need to be a admin to access other users"));
+        return next(createError(403, "You need to be an admin to execute this function."));
       }
     });
   };
