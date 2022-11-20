@@ -1,7 +1,7 @@
 import { createBrowserRouter, Link } from "react-router-dom";
 import AddPlayer from "./components/addPlayer/AddPlayer";
 import MainContainer from "./components/mainContainer/MainContainer";
-import Navbar from "./components/navbar/Navbar";
+import Navbar, { SearchBar } from "./components/navbar/Navbar";
 import SearchResults from "./components/searchResults/SearchResults";
 import Game from "./components/game/Game";
 import "./app.scss";
@@ -17,7 +17,7 @@ const InitialPage = () => (
 
 const PlayersPage = () => (
   <section className="PageContainer">
-    <Navbar searchBar={true}/>
+    <SearchBar />
     <MainContainer />
   </section>
 )
@@ -29,8 +29,8 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: 
-        <Link to="/quiz" className="playButton">Play</Link>,
+        element:
+          <Link to="/quiz" className="playButton">Play</Link>,
       },
     ],
   },
