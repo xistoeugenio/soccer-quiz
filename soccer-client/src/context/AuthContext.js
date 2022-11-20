@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
                 user: state.user,
                 loading: state.loading,
                 error: state.error,
+                dispatchAuth
             }}
         >
             {children}
