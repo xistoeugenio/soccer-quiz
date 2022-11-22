@@ -1,7 +1,7 @@
 import "./login.scss"
 import { Link } from "react-router-dom"
 import { useContext, useState } from "react";
-import {AuthContext} from "../../context/AuthContext"
+import { AuthContext } from "../../context/AuthContext"
 import axios from "axios"
 
 export default function Login() {
@@ -31,9 +31,9 @@ export default function Login() {
     <div className="login">
       <div className="inputs">
         <label>Email</label>
-        <input type="text" name="email" onChange={handleChange}/>
+        <input type="text" name="email" onChange={handleChange} />
         <label>Password</label>
-        <input type="text" name="password" onChange={handleChange}/>
+        <input type="text" name="password" onChange={handleChange} />
       </div>
       <p>this is a error</p>
       <button onClick={handleClick}>login</button>
