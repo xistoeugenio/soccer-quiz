@@ -23,7 +23,7 @@ export default function Login() {
       await login(credentials)
       navigate("/")
     } catch (err) {
-      console.log(err.response.data)
+      console.log(err.response?.data  || "there is a problem with our server")
     }
   };
 

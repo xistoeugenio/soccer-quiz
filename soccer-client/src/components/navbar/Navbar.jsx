@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import { Dehaze, Search } from '@mui/icons-material';
-
 import "./navbar.scss"
 import { MenuActions, MenuUser } from "../menu/Menu";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar({ searchBar }) {
     const [openMenu, setOpenMenu] = useState(false)
     const [menuUser, setMenuUser] = useState(false)
+
+    const {currentUser} = useContext(AuthContext)
 
 
     const userClick = () => {
@@ -34,8 +36,8 @@ export default function Navbar({ searchBar }) {
                 </button>
             </div>
             <div className="rightContainer">
-                <div className="userContainer">
-                    <p className="username">XistoEugenio</p>
+                {currentUser?<div className="userContainer">
+                    <p className="username">{currentUser.username}</p>
                     <div className="imgContainer"
                         onClick={() => {
                             userClick()
@@ -44,6 +46,9 @@ export default function Navbar({ searchBar }) {
                         <img src="./assets/xisto.jpg" alt="" />
                     </div>
                 </div>
+                :
+                <button><Link to="/login">login</Link></button>
+            }
                 {menuUser && <MenuUser />}
             </div>
 

@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link } from "react-router-dom";
+import { createBrowserRouter, Link, Navigate } from "react-router-dom";
 import AddPlayer from "./components/addPlayer/AddPlayer";
 import MainContainer from "./components/mainContainer/MainContainer";
 import Navbar, { SearchBar } from "./components/navbar/Navbar";
@@ -7,6 +7,8 @@ import Game from "./components/game/Game";
 import "./app.scss";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 const InitialPage = () => (
   <section className="PageContainer">
@@ -21,6 +23,15 @@ const PlayersPage = () => (
     <MainContainer />
   </section>
 )
+
+const ProtectRouter = ({ children }) => {
+  const { currentUser } = useContext(AuthContext)
+
+  if (!currentUser) {
+    return <Navigate to="/login" />
+  }
+  return children
+}
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +57,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/add",
-    element: <AddPlayer />
+    element:
+      <ProtectRouter>
+        <AddPlayer />
+      </ProtectRouter>
   },
   {
     path: "/quiz",

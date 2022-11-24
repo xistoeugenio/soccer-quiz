@@ -6,11 +6,13 @@ import axios from "axios"
 import { useContext } from "react"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import { Skeleton } from "@mui/material"
+import { AuthContext } from "../../context/AuthContext"
 
 export default function Modal({ setShowModal, currentPlayer }) {
 
     const [loading, setLoading] = useState(true)
     const { dispatchPlayer } = useContext(SinglePlayerContext)
+    const { currentUser } = useContext(AuthContext)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,22 +34,25 @@ export default function Modal({ setShowModal, currentPlayer }) {
     return (
         <div className="modalContainer" >
             <Close className="iconClose" onClick={() => { setShowModal(false) }} />
-            {loading ? 
-           <Skeleton
-           className="skeletonCard"
-           sx={{ bgcolor: '#8b8181' }}
-           variant='rectangular' 
-           />
-             : <FlippableCard />}
-            <div className="containerBottom">
-                <button className="deleteButton" onClick={() => { alertMessage() }}>
-                    <Delete className="icon" />
-                </button>
-                <button className="editButton" onClick={() => { alertMessage() }}>
-                    <Edit className="icon" />
-                </button>
+            {loading ?
+                <Skeleton
+                    className="skeletonCard"
+                    sx={{ bgcolor: '#8b8181' }}
+                    variant='rectangular'
+                />
+                : <FlippableCard />}
+            {
+                currentUser &&
+                <div className="containerBottom">
+                    <button className="deleteButton" onClick={() => { alertMessage() }}>
+                        <Delete className="icon" />
+                    </button>
+                    <button className="editButton" onClick={() => { alertMessage() }}>
+                        <Edit className="icon" />
+                    </button>
+                </div>
+            }
 
-            </div>
         </div>
     )
 }
