@@ -1,5 +1,5 @@
 import "./login.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext"
 import axios from "axios"
@@ -10,18 +10,18 @@ export default function Login() {
     password: undefined,
   });
 
-  const { loading, error, dispatchAuth } = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  console.log(credentials)
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8800/api/login", credentials);
-      console.log(res.data)
+      await login(credentials)
+      navigate("/")
     } catch (err) {
       console.log(err.response.data)
     }
