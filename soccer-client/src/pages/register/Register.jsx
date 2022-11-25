@@ -47,12 +47,14 @@ export default function Register() {
       {error ?
         <p className="error">
           {
-            (error === "Problems on our server.") ?
-              error :
+            (error === "User already exist! Check your email or username.") ?
               <>
                 {error}
                 < Link to="/login" className="link">Login</Link>
               </>
+              :
+              error
+
           }
 
         </p>

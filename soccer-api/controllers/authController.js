@@ -20,7 +20,7 @@ export const register = async (req, res, next) => {
 
     const existedData = await User.find({ "$or": [{ email: req.body.email }, { username: req.body.username }] })
     if (existedData.length > 0)
-      return next(createError(500, "User already exist!"))
+      return next(createError(500, "User already exist! Check your email or username."))
 
     await newUser.save()
     res.status(200).send("user has been created")
