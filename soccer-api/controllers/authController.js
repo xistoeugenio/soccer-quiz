@@ -53,11 +53,24 @@ export const login = async (req, res, next) => {
 
     res
       .cookie("access_token", token, {
-        httpOnly: true,
+        httpOnly: true
       })
       .status(200)
       .json({ details: { ...otherDetails }, isAdmin });
   } catch (err) {
     next(err);
+  }
+};
+
+//LOGOUT
+
+export const logout = (req, res) => {
+
+  try {
+    res.clearCookie("access_token")
+
+    res.json("logout")
+  } catch (error) {
+    console.log(error)
   }
 };

@@ -9,7 +9,7 @@ export default function Navbar({ searchBar }) {
     const [openMenu, setOpenMenu] = useState(false)
     const [menuUser, setMenuUser] = useState(false)
 
-    const {currentUser} = useContext(AuthContext)
+    const { currentUser } = useContext(AuthContext)
 
 
     const userClick = () => {
@@ -36,20 +36,26 @@ export default function Navbar({ searchBar }) {
                 </button>
             </div>
             <div className="rightContainer">
-                {currentUser?<div className="userContainer">
-                    <p className="username">{currentUser.username}</p>
-                    <div className="imgContainer"
-                        onClick={() => {
-                            userClick()
-                        }}
-                    >
-                        <img src="./assets/xisto.jpg" alt="" />
-                    </div>
-                </div>
-                :
-                <button><Link to="/login">login</Link></button>
-            }
-                {menuUser && <MenuUser />}
+                {currentUser
+                    ?
+                    <>
+                        <div className="userContainer">
+                            <p className="username">{currentUser.username}</p>
+                            <div className="imgContainer"
+                                onClick={() => {
+                                    userClick()
+                                }}
+                            >
+                                <img src="./assets/icon_user.jpg" alt="" />
+                            </div>
+                        </div>
+                        {menuUser && <MenuUser />}
+                    </>
+                    :
+                    <button><Link to="/login">login</Link></button>
+
+                }
+
             </div>
 
             {openMenu && <MenuActions />}

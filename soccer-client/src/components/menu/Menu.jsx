@@ -1,4 +1,6 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
 import "./menu.scss"
 
 export function MenuActions() {
@@ -17,16 +19,24 @@ export function MenuActions() {
 }
 
 
+
+
 export function MenuUser() {
-    return (
-      <div className="menuUser">
-        <ul className="actionsList">
-          <li>first</li>
-          <li>second</li>
-          <li>third</li>
-          <li>forth</li>
-          </ul>
-        <button className="logout" >Logout</button>
-      </div>
-    )
+
+  const {logout} = useContext(AuthContext)
+
+  const handleLogout = async () => {
+    logout()
   }
+  return (
+    <div className="menuUser">
+      <ul className="actionsList">
+        <li>first</li>
+        <li>second</li>
+        <li>third</li>
+        <li>forth</li>
+      </ul>
+      <button className="logout" onClick={handleLogout}>Logout</button>
+    </div>
+  )
+}
