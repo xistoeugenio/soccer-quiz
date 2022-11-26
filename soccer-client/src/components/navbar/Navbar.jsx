@@ -52,7 +52,9 @@ export default function Navbar({ searchBar }) {
                         {menuUser && <MenuUser />}
                     </>
                     :
-                    <button><Link to="/login">login</Link></button>
+                    <Link to="/login" className="link">
+                        <button className="loginButton">Login</button>
+                    </Link>
 
                 }
 

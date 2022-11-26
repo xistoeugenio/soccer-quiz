@@ -1,7 +1,7 @@
 import { Skeleton } from '@mui/material'
-import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { makeRequest } from '../../axios'
 import Modal from '../modal/Modal'
 import './searchResults.scss'
 
@@ -15,7 +15,7 @@ export default function SearchResults() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(process.env.REACT_APP_URL_API + "api/players")
+                const response = await makeRequest.get("/players")
                 setData(response.data)
                 setLoading(false)
             } catch (error) {

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
+import { makeRequest } from "../../axios"
 import { GameContext } from "../../context/gameContext"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import BackCard from "../backCard/BackCard"
@@ -22,7 +23,7 @@ export default function Game() {
   const initGame = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
+      const response = await makeRequest.get("/game")
       const data = response.data
       dispatchGame({ type: "START_GAME", payload: data.all })
       dispatchPlayer({
@@ -50,7 +51,7 @@ export default function Game() {
       setLoadingOption(true)
     }
     try {
-      const response = await axios.get(process.env.REACT_APP_URL_API + "api/game")
+      const response = await makeRequest.get("/game")
       const data = response.data
       dispatchGame({ type: "NEW_OPTIONS", payload: data.all })
       dispatchPlayer({
@@ -102,7 +103,7 @@ export default function Game() {
     setSelectedAnswer(id)
     setClassName("playerButton selected")
     try {
-      const response = await axios.post(process.env.REACT_APP_URL_API + "api/game/" + id)
+      const response = await makeRequest.post("/game/" + id)
       verifyQuestion(response.data)
     } catch (error) {
       console.log(error)

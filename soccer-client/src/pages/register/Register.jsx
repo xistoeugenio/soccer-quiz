@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate, } from "react-router-dom";
 import { CircularProgress } from "@mui/material"
 import "./register.scss"
+import { makeRequest } from "../../axios";
 
 export default function Register() {
   const [credentials, setCredentials] = useState({
@@ -24,7 +24,7 @@ export default function Register() {
     e.preventDefault();
     setLoading(true)
     try {
-      await axios.post("http://localhost:8800/api/register", credentials);
+      await makeRequest.post("/register", credentials);
       navigate("/login")
     } catch (err) {
       setError(err.response?.data.message || "Problems on our server.")

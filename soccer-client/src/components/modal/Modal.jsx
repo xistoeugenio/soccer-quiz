@@ -2,11 +2,11 @@ import "./modal.scss"
 import FlippableCard from "../flippableCard/FlippableCard"
 import { Close, Delete, Edit } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import axios from "axios"
 import { useContext } from "react"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import { Skeleton } from "@mui/material"
 import { AuthContext } from "../../context/AuthContext"
+import { makeRequest } from "../../axios"
 
 export default function Modal({ setShowModal, currentPlayer }) {
 
@@ -17,7 +17,7 @@ export default function Modal({ setShowModal, currentPlayer }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(process.env.REACT_APP_URL_API + "api/players/" + currentPlayer)
+                const response = await makeRequest.get("/players/" + currentPlayer)
                 dispatchPlayer({ type: "NEW_PLAYER", payload: response.data })
                 setLoading(false)
             } catch (error) {

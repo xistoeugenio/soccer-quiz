@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { leagues, list, countries, positions } from "../../dataPlayers";
-import axios from "axios"
 import "./addPlayer.scss";
+import { makeRequest } from "../../axios";
 
 export default function AddPlayer() {
 
@@ -53,7 +53,7 @@ export default function AddPlayer() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post("http://localhost:8800/api/players", values)
+            const res = await makeRequest.post("/players", values)
             console.log(res)
         } catch (error) {
             alertMessage()
