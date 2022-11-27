@@ -57,18 +57,23 @@ export const startMatch = async (req, res, next) => {
     }
 }
 
-export const verify = async (req, res, next) => {
+export const verifyAnswer = async (req, res, next) => {
+
+    const { player_id, match_id } = req.query;
+    
     try {
-        const answer = req.params.id
+        
+        const currentMacth = await Match.findById(match_id)
         var response = null
-        if (answer === currentPlayer.id) {
-            response = "right"
+
+        if (currentMacth.rightAnswer.id === player_id) {
+            response  = "right"
         } else {
             response = "wrong"
         }
 
-        res.status(200).json(response)
+        res.status(200).json(player_id);
     } catch (err) {
-        next(err)
+        next(err);
     }
 }
