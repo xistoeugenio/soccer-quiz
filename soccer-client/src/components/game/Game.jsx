@@ -17,24 +17,24 @@ export default function Game() {
   const [loadingOption, setLoadingOption] = useState(false)
   const [className, setClassName] = useState("playerButton")
   const [selectedAnswer, setSelectedAnswer] = useState(null)
+  const [match, setMacth] = useState(null)
 
-  console.log(player)
 
   const initGame = async () => {
     setLoading(true)
     try {
       const response = await makeRequest.get("/game")
       const data = response.data
-      dispatchGame({ type: "START_GAME", payload: data.all })
+      dispatchGame({ type: "START_GAME", payload: data.options })
       dispatchPlayer({
         type: "NEW_PLAYER", payload: {
-          team: data.team,
-          country: data.country,
-          league: data.league,
-          position: data.position
+          team: data.info.team,
+          country: data.info.country,
+          league: data.info.league,
+          position: data.info.position
         }
       })
-      console.log(data)
+      setMacth(data.id_match)
       setLoading(false)
     } catch (error) {
       console.log(error)
@@ -53,15 +53,16 @@ export default function Game() {
     try {
       const response = await makeRequest.get("/game")
       const data = response.data
-      dispatchGame({ type: "NEW_OPTIONS", payload: data.all })
+      dispatchGame({ type: "NEW_OPTIONS", payload: data.options })
       dispatchPlayer({
         type: "NEW_PLAYER", payload: {
-          team: data.team,
-          country: data.country,
-          league: data.league,
-          position: data.position
+          team: data.info.team,
+          country: data.info.country,
+          league: data.info.league,
+          position: data.info.position
         }
       })
+      setMacth(data.id_match)
       setLoadingOption(data && false)
       setSelectedAnswer(null)
     } catch (error) {
@@ -103,7 +104,7 @@ export default function Game() {
     setSelectedAnswer(id)
     setClassName("playerButton selected")
     try {
-      const response = await makeRequest.post("/game/" + id)
+      const response = await makeRequest.get(`/game/verify?player_id=${id}&match_id=${match}`)
       verifyQuestion(response.data)
     } catch (error) {
       console.log(error)
@@ -131,6 +132,7 @@ export default function Game() {
                       <div className={selectedAnswer ? "playersContainer clicked" : "playersContainer"}>
                         {options.map((player) => (
                           <button
+                            key={player.id}
                             disabled={selectedAnswer && true}
                             className={selectedAnswer === player.id ? className : "playerButton"}
                             onClick={() => { sendQuestion(player.id) }}>{player.name}</button>

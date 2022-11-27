@@ -72,7 +72,7 @@ export const verifyAnswer = async (req, res, next) => {
             response = "wrong"
         }
 
-        res.status(200).json(player_id);
+        res.status(200).json(response);
     } catch (err) {
         next(err);
     }
