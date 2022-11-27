@@ -1,10 +1,10 @@
 import express from "express"
-import { singlePlayer, verify } from "../controllers/gameController.js";
+import { startMatch, verify } from "../controllers/gameController.js";
 
 
 const router = express.Router();
 
-router.get("/", singlePlayer)
+router.get("/", startMatch)
 
 router.post("/:id", verify)
 //DELETE

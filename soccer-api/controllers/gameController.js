@@ -1,4 +1,5 @@
 import Player from "../models/Player.js";
+import Match from "../models/Match.js";
 
 const randomNumber = (number, number2, number3) => {
     var ranNum = Math.floor(Math.random() * 20 + 1);
@@ -18,10 +19,8 @@ const drawAnswer = () => {
     return random
 }
 
-var currentPlayer = {}
 
-
-export const singlePlayer = async (req, res, next) => {
+export const startMatch = async (req, res, next) => {
 
     try {
         const first = await Player.findOne({ "id_number": randomNumber() })
@@ -36,11 +35,23 @@ export const singlePlayer = async (req, res, next) => {
             { name: forth.name, id: forth.id },
         ]
 
+        const currentPlayer = await Player.findById(all[drawAnswer()].id)
+        const { id, team, country, league, position, name } = currentPlayer
 
-        currentPlayer = await Player.findById(all[drawAnswer()].id)
-        const { team, country, league, position, ...others } = currentPlayer
+        const newMatch = new Match({
+            options: all,
+            info: {
+                team, country, league, position
+            },
+            rightAnswer: {
+                id, name
+            }
+        })
 
-        res.status(200).json({ all, team, country, league, position })
+        const savedPlayer = await newMatch.save()
+        const { options, info } = savedPlayer
+
+        res.status(200).json({ options, info, id_match: savedPlayer._id })
     } catch (err) {
         next(err)
     }
