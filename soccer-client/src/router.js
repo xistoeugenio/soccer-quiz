@@ -1,5 +1,6 @@
 import { createBrowserRouter, Link, Navigate } from "react-router-dom";
 import AddPlayer from "./components/addPlayer/AddPlayer";
+import EditPlayer from "./components/editPlayer/EditPlayer"
 import MainContainer from "./components/mainContainer/MainContainer";
 import Navbar, { SearchBar } from "./components/navbar/Navbar";
 import SearchResults from "./components/searchResults/SearchResults";
@@ -60,6 +61,13 @@ export const router = createBrowserRouter([
     element:
       <ProtectRouter>
         <AddPlayer />
+      </ProtectRouter>
+  },
+  {
+    path: "/edit",
+    element:
+      <ProtectRouter>
+        <EditPlayer />
       </ProtectRouter>
   },
   {

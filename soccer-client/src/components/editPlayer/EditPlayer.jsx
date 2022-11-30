@@ -1,24 +1,31 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { leagues, list, countries, positions } from "../../dataPlayers";
-import "./addPlayer.scss";
 import { makeRequest } from "../../axios";
 import { CircularProgress } from "@mui/material";
+import "../addPlayer/addPlayer.scss"
+import { SinglePlayerContext } from "../../context/SinglePlayerContext";
+import { useNavigate } from "react-router-dom";
 
-export default function AddPlayer() {
+export default function EditPlayer() {
+
+    const { player } = useContext(SinglePlayerContext)
 
     const [selected, setSelected] = useState("la liga")
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [values, setValues] = useState({
-        name: "",
-        country: "Brazil",
-        team: "Arsenal",
-        league: "Premier League",
-        description: "",
-        position: "Goalkeeper(GK)",
-        imgPlayer: ""
+        name: player.name,
+        country: player.country,
+        team: player.team,
+        league: player.league,
+        description: player.description,
+        position: player.position,
+        imgPlayer: player.imgPlayer
     })
+
+    const navigate = useNavigate()
+
 
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
@@ -55,8 +62,8 @@ export default function AddPlayer() {
         setLoading(true)
         e.preventDefault()
         try {
-            const res = await makeRequest.post("/players", values)
-            console.log(res)
+            await makeRequest.put("/players/"+ player._id, values)
+            navigate("/players")
         } catch (error) {
             alertMessage()
             console.log(error)
@@ -77,6 +84,7 @@ export default function AddPlayer() {
                     className="input"
                     onChange={handleChange}
                     name="name"
+                    value={values.name}
                     required
                 />
                 <select name="country" id="" className="input" onChange={handleChange}>
@@ -119,11 +127,25 @@ export default function AddPlayer() {
                         </option>
                     ))}
                 </select>
-                <input type="text" placeholder="description(optional)" className="input" name="description" onChange={handleChange} />
-                <input type="text" placeholder="Image URL(optional)" className="input" name="imgPlayer" onChange={handleChange} />
+                <input
+                    type="text"
+                    placeholder="description(optional)"
+                    className="input"
+                    name="description"
+                    onChange={handleChange}
+                    value={values.description}
+                />
+                <input
+                    type="text"
+                    placeholder="Image URL(optional)"
+                    className="input"
+                    name="imgPlayer"
+                    onChange={handleChange}
+                    value={values.imgPlayer}
+                />
                 {loading
                     ? <CircularProgress />
-                    : <button type="submit">Add player</button>}
+                    : <button type="submit">Update</button>}
             </form>
         </div>
     )

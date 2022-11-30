@@ -123,63 +123,63 @@ export const countries = [
 export const positions = [
     {
         id: 1,
-        name: "Goalkeeper",
+        name: "Goalkeeper(GK)",
         abbreviation: "GK"
     },
     {
         id: 2,
-        name: "Center-back",
+        name: "Center-back(CB)",
         abbreviation: "CB"
     },
     {
         id: 3,
-        name: "Sweeper",
+        name: "Sweeper(SW)",
         abbreviation: "SW"
     },
     {
         id: 4,
-        name: "Right Full-back",
+        name: "Right Full-back(RB)",
         abbreviation: "RB"
     },
     {
         id: 5,
-        name: "Left Full-back",
+        name: "Left Full-back(LB)",
         abbreviation: "LB"
     },
     {
         id: 6,
-        name: "Center midfield",
+        name: "Center midfield(CM)",
         abbreviation: "CM"
     },
     {
         id: 7,
-        name: "Defensive midfield",
+        name: "Defensive midfield(DM)",
         abbreviation: "DM"
     },
     {
         id: 8,
-        name: "Attacking midfield",
+        name: "Attacking midfield(AM)",
         abbreviation: "AM"
     },
     {
         id: 9,
-        name: "Wide midfield",
+        name: "Wide midfield(RW)",
         abbreviation: "RW"
     },
     {
         id: 10,
-        name: "Wingers",
+        name: "Wingers(LW)",
         abbreviation: "LW"
     },
     {
         id: 11,
-        name: "Center forward",
+        name: "Center forward(CF)",
         abbreviation: "CF"
     },
     {
         id: 12,
-        name: "Striker",
-        abbreviation: "S"
+        name: "Striker(ST)",
+        abbreviation: "ST"
     },
 
 

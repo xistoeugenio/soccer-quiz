@@ -1,17 +1,66 @@
-.addPlayer{
-    background-color: dodgerblue;
+.addPlayer {
+    background-color: aqua;
     width: 400px;
-    height: 400px;
+    max-width: 95%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    
-    .input{
-        box-sizing: border-box;
-        padding-left: 10px;
-        width: 80%;
-        height: 10%;
+    border-radius: 5px;
+    gap: 20px;
+    padding: 20px 0;
+
+    .imgContainer {
+        background-color: black;
+        width: 96px;
+        height: 120px;
+        border-radius: 5px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 5px;
+        }
     }
+
+    form {
+        //background-color: blueviolet;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .input {
+            box-sizing: border-box;
+            padding-left: 10px;
+            width: 80%;
+            height: 10%;
+            border-radius: 5px;
+            border: 1px solid black;
+            outline: none;
+        }
+
+        button {
+            background-color: dodgerblue;
+            height: 8%;
+            width: 120px;
+            border: 2px solid  black;
+            border-radius: 5px;
+            color: balck;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+
+            &:hover{
+                background: none;
+            }
+        }
+    }
+
 
 }

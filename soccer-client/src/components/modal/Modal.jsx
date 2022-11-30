@@ -7,6 +7,7 @@ import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import { Skeleton } from "@mui/material"
 import { AuthContext } from "../../context/AuthContext"
 import { makeRequest } from "../../axios"
+import { Link } from "react-router-dom"
 
 export default function Modal({ setShowModal, currentPlayer }) {
 
@@ -57,9 +58,11 @@ export default function Modal({ setShowModal, currentPlayer }) {
                     <button className="deleteButton" onClick={deletePlayer}>
                         <Delete className="icon" />
                     </button>
-                    <button className="editButton" onClick={() => { alertMessage() }}>
+                    <Link to="/edit"><button className="editButton">
+
                         <Edit className="icon" />
-                    </button>
+
+                    </button></Link>
                 </div>
             }
 
