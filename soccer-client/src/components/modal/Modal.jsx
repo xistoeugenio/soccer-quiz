@@ -31,6 +31,16 @@ export default function Modal({ setShowModal, currentPlayer }) {
         alert("You must be an admin to add, update or delete any data. thank you for understanding!")
     }
 
+    const deletePlayer = async () => {
+        try {
+            await makeRequest.delete("/players/" + currentPlayer)
+            document.location.reload()
+        } catch (error) {
+            alertMessage()
+            console.log(error)
+        }
+    }
+
     return (
         <div className="modalContainer" >
             <Close className="iconClose" onClick={() => { setShowModal(false) }} />
@@ -44,7 +54,7 @@ export default function Modal({ setShowModal, currentPlayer }) {
             {
                 currentUser &&
                 <div className="containerBottom">
-                    <button className="deleteButton" onClick={() => { alertMessage() }}>
+                    <button className="deleteButton" onClick={deletePlayer}>
                         <Delete className="icon" />
                     </button>
                     <button className="editButton" onClick={() => { alertMessage() }}>
