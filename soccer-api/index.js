@@ -31,7 +31,8 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-    origin: "http://localhost:3000"
+    origin: ["https://socciz.online", "http://localhost:3000"],
+    credentials: true,
 }))
 app.use(cookieParser())
 app.use(express.json())

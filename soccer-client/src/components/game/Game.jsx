@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
 import { makeRequest } from "../../axios"
