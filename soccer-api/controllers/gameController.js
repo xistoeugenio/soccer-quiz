@@ -45,15 +45,23 @@ const randomOptions = (value) => {
 
 export const startMatch = async (req, res, next) => {
     const { mode } = req.query
+
     var data = null
+
     try {
+        
         if (mode === "brazilian") {
             data = await Player.find({ "country": "Brazil" })
         } else {
             data = await Player.find()
         }
 
-        return res.status(200).json(randomOptions(data))
+        const newMatch = new Match(randomOptions(data))
+
+        const savedMacth = await newMatch.save()
+        const {options, info} = savedMacth
+
+        return res.status(200).json({ options, info, id_match: savedMacth._id })
     } catch (error) {
         next(error)
     }
