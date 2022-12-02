@@ -1,5 +1,6 @@
 import Player from "../models/Player.js";
 import Match from "../models/Match.js";
+import { createError } from "../utils/error.js";
 
 const drawAnswer = () => {
     var random = Math.floor(Math.random() * 4);
@@ -47,64 +48,31 @@ export const startMatch = async (req, res, next) => {
     const { mode } = req.query
 
     var data = null
-
+    const countries = req.query.countries?.split(",")
+    const leagues = req.query.leagues?.split(",")
     try {
-        
+
         if (mode === "brazilian") {
+
             data = await Player.find({ "country": "Brazil" })
-        } else {
-            data = await Player.find()
+        }
+        if (mode === "custom") {
+            if (!countries || !leagues)
+                return next(createError(400, "You must add at least one country and one league."))
+
+            data = await Player.find({ "$or": [{ "country": { "$in": [...countries] } }, { "league": { "$in": [...leagues] } }] })
         }
 
         const newMatch = new Match(randomOptions(data))
-
         const savedMacth = await newMatch.save()
-        const {options, info} = savedMacth
+        const { options, info } = savedMacth
 
         return res.status(200).json({ options, info, id_match: savedMacth._id })
     } catch (error) {
         next(error)
     }
-
 }
 
-/*
-export const startMatch = async (req, res, next) => {
-
-    try {
-        const first = await Player.findOne({ "id_number": randomNumber() })
-        const second = await Player.findOne({ "id_number": randomNumber(first.id_number) })
-        const third = await Player.findOne({ "id_number": randomNumber(first.id_number, second.id_number) })
-        const forth = await Player.findOne({ "id_number": randomNumber(first.id_number, second.id_number, third.id_number) })
-
-        const all = [
-            { name: first.name, id: first.id },
-            { name: second.name, id: second.id },
-            { name: third.name, id: third.id },
-            { name: forth.name, id: forth.id },
-        ]
-
-        const currentPlayer = await Player.findById(all[drawAnswer()].id)
-        const { id, team, country, league, position, name } = currentPlayer
-
-        const newMatch = new Match({
-            options: all,
-            info: {
-                team, country, league, position
-            },
-            rightAnswer: {
-                id, name
-            }
-        })
-
-        const savedPlayer = await newMatch.save()
-        const { options, info } = savedPlayer
-
-        res.status(200).json({ options, info, id_match: savedPlayer._id })
-    } catch (err) {
-        next(err)
-    }
-}*/
 
 export const verifyAnswer = async (req, res, next) => {
 
