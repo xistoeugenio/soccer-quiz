@@ -10,6 +10,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import GameMode from "./pages/chooseMode/GameMode";
 
 const InitialPage = () => (
   <section className="PageContainer">
@@ -42,7 +43,11 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element:
-          <Link to="/quiz" className="playButton">Play</Link>,
+          <Link to="/game_mode" className="playButton">Play</Link>,
+      },
+      {
+        path: "/game_mode",
+        element: <GameMode />
       },
     ],
   },

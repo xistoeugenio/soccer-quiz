@@ -10,7 +10,7 @@ import "./game.scss"
 
 export default function Game() {
 
-  const { dispatchPlayer, player } = useContext(SinglePlayerContext)
+  const { dispatchPlayer } = useContext(SinglePlayerContext)
   const { dispatchGame, score, start, options } = useContext(GameContext)
   const [loading, setLoading] = useState(false)
   const [loadingOption, setLoadingOption] = useState(false)
