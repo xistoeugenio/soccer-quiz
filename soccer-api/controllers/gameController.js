@@ -51,15 +51,16 @@ export const startMatch = async (req, res, next) => {
     const countries = req.query.countries?.split(",")
     const leagues = req.query.leagues?.split(",")
     try {
+        if(!mode){
+            data= await Player.find()
+        }
 
         if (mode === "brazilian") {
-
             data = await Player.find({ "country": "Brazil" })
         }
         if (mode === "custom") {
             if (!countries || !leagues)
                 return next(createError(400, "You must add at least one country and one league."))
-
             data = await Player.find({ "$or": [{ "country": { "$in": [...countries] } }, { "league": { "$in": [...leagues] } }] })
         }
 

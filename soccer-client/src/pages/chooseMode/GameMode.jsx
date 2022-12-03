@@ -63,7 +63,8 @@ export default function GameMode() {
             <legend>league</legend>
             {listLeagues.map((league) => (
               <>
-                <input type="checkbox" id={league.title} onChange={handleChangeLeague} name={league.title} />
+                <input type="checkbox" id={league.title} onChange={handleChangeLeague} name={league.title}
+                />
                 <label htmlFor={league.title}>{league.title}</label><br />
               </>
             ))}
