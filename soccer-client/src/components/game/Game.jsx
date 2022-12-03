@@ -19,7 +19,7 @@ export default function Game() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [match, setMacth] = useState(null)
 
-  const { league, country, mode } = useContext(GameModeContext)
+  const { selectedLeagues, selectedCountries, mode } = useContext(GameModeContext)
 
   const setPath = (mode) => {
     switch (mode) {
@@ -27,7 +27,7 @@ export default function Game() {
         return "/game?mode=brazilian"
         break;
       case "custom":
-        return `/game?leagues=${league}&countries=${country}&mode=custom`
+        return `/game?leagues=${selectedCountries}&countries=${selectedCountries}&mode=custom`
         break;
       default:
         return "/game"

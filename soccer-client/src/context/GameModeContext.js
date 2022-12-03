@@ -1,43 +1,43 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const GameModeContext = createContext();
 
 export const GameModeProvider = ({ children }) => {
-    const [league, setLeague] = useState([])
-    const [country, setCountry] = useState([])
+    const [selectedLeagues, setSelectedLeagues] = useState([])
+    const [selectedCountries, setSelectedCountries] = useState([])
     const [mode, setMode] = useState(null)
 
     const removeLeague = (index) => {
-        setLeague([
-          ...league.slice(0, index),
-          ...league.slice(index + 1, league.length)
+        setSelectedLeagues([
+          ...selectedLeagues.slice(0, index),
+          ...selectedLeagues.slice(index + 1, selectedLeagues.length)
         ]);
       }
     
       const handleChangeLeague = (e) => {
-        const indexItem = league.indexOf(e.target.name)
+        const indexItem = selectedLeagues.indexOf(e.target.name)
     
         if (e.target.checked) {
           if (indexItem < 0)
-            setLeague((prev) => ([...prev, e.target.name]))
+          setSelectedLeagues((prev) => ([...prev, e.target.name]))
         } else {
           removeLeague(indexItem)
         }
       };
     
       const removeCountry = (index) => {
-        setCountry([
-          ...country.slice(0, index),
-          ...country.slice(index + 1, country.length)
+        setSelectedCountries([
+          ...selectedCountries.slice(0, index),
+          ...selectedCountries.slice(index + 1, selectedCountries.length)
         ]);
       }
     
       const handleChangeCountry = (e) => {
-        const indexItem = country.indexOf(e.target.name)
+        const indexItem = selectedCountries.indexOf(e.target.name)
     
         if (e.target.checked) {
           if (indexItem < 0)
-            setCountry((prev) => ([...prev, e.target.name]))
+          setSelectedCountries((prev) => ([...prev, e.target.name]))
         } else {
           removeCountry(indexItem)
         }
@@ -52,8 +52,8 @@ export const GameModeProvider = ({ children }) => {
             value={{
                 handleChangeCountry,
                 handleChangeLeague,
-                league,
-                country,
+                selectedLeagues,
+                selectedCountries,
                 mode,
                 chooseMode
             }}

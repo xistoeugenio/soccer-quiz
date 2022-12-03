@@ -10,15 +10,15 @@ export default function GameMode() {
   const {
     handleChangeCountry,
     handleChangeLeague,
-    league,
-    country,
+    selectedLeagues,
+    selectedCountries,
     mode,
     chooseMode
   } = useContext(GameModeContext)
 
   const navigate = useNavigate()
 
-  console.log([...league, ...country, mode])
+  console.log([...selectedLeagues, ...selectedCountries, mode])
 
   const changeMode = (mode) => {
     switch (mode) {
@@ -38,11 +38,11 @@ export default function GameMode() {
     }
   }
 
-  const startGame = (e)=>{
+  const startGame = (e) => {
     e.preventDefault()
-    if(!league.length || !country.length){
+    if (!selectedLeagues.length || !selectedCountries.length) {
       setShowError(true)
-    }else{
+    } else {
       navigate("/quiz")
     }
 
@@ -53,9 +53,9 @@ export default function GameMode() {
   return (
     <div className="gameModeContainer">
       {!showCustom ? <div className="optionsMode">
-        <button className="defaultBtn" onClick={()=>{changeMode()}}>Default</button>
-        <button className="brazilianBtn" onClick={()=>{changeMode("brazilian")}}>Brazilian mode</button>
-        <button className="customBtn" onClick={()=>{changeMode("custom")}}>Custom mode</button>
+        <button className="defaultBtn" onClick={() => { changeMode() }}>Default</button>
+        <button className="brazilianBtn" onClick={() => { changeMode("brazilian") }}>Brazilian mode</button>
+        <button className="customBtn" onClick={() => { changeMode("custom") }}>Custom mode</button>
       </div>
         :
         <form className="CustomMode" onSubmit={startGame}>
@@ -63,17 +63,28 @@ export default function GameMode() {
             <legend>league</legend>
             {listLeagues.map((league) => (
               <>
-                <input type="checkbox" id={league.title} onChange={handleChangeLeague} name={league.title}
+                <input
+                  type="checkbox"
+                  id={league.title}
+                  onChange={handleChangeLeague}
+                  name={league.title}
+                  checked = {selectedLeagues.includes(league.title)}
                 />
                 <label htmlFor={league.title}>{league.title}</label><br />
               </>
             ))}
           </fieldset>
-          <fieldset className="CountryContainer" aria-required>
+          <fieldset className="CountryContainer" >
             <legend>Country</legend>
             {countries.map((country) => (
               <>
-                <input type="checkbox" id={country.id} onChange={handleChangeCountry} name={country.title} />
+                <input
+                  type="checkbox"
+                  id={country.id}
+                  onChange={handleChangeCountry}
+                  name={country.title}
+                  checked = {selectedCountries.includes(country.title)}
+                />
                 <label htmlFor={country.id}>{country.title}</label><br />
               </>
             ))}

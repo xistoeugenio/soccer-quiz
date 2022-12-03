@@ -10,7 +10,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
-import GameMode from "./pages/chooseMode/GameMode";
+import GameMode from "./pages/gameMode/GameMode";
 
 const InitialPage = () => (
   <section className="PageContainer">
