@@ -161,8 +161,11 @@
         .leftContainer {
             width: auto;
 
-            h1 {
+            a {
                 color: white;
+                text-decoration: none;
+                font-size: 22px;
+                font-weight: 500;
             }
         }
 

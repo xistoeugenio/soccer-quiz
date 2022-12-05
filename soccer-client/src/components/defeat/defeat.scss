@@ -13,7 +13,7 @@
         background: linear-gradient(45deg, #000000 0%, #061722 50%, #0A2A3E 100%);
         background-size: cover;
         width: 500px;
-        height: 250px;
+        height: 270px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,6 +33,28 @@
                 padding: 5px;
                 border-radius: 5px;
             }
+
+            .buttons {
+                display: flex;
+                gap: 20px;
+
+                button {
+                    background-color: rgb(51, 117, 51);
+                    height: 40px;
+                    padding: 5px;
+                    border-radius: 5px;
+                    color: white;
+                    font-weight: 500;
+                    font-size: 17px;
+                    cursor: pointer;
+
+                    &.home{
+                        background-color: rgb(45, 84, 190);
+                    }
+                }
+            }
+
+
         }
     }
 

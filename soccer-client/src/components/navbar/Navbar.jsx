@@ -70,7 +70,7 @@ export function SearchBar() {
     return (
         <div className="Navbar search">
             <div className="leftContainer">
-                <h1>Socciz</h1>
+                <a href="/">Socciz</a>
             </div>
             <div className="rightContainer">
                 <div className="searchbar">

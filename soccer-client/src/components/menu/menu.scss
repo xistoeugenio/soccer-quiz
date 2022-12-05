@@ -1,7 +1,7 @@
 .menuActions {
     position: absolute;
     width: 100px;
-    height: 150px;
+    height: auto;
     border-radius: 5px;
     border: 2px solid white;
     top: calc(100% + 5px);
@@ -21,6 +21,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        gap: 10px;
+        padding: 10px 0;
 
         li {
             background-color: beige;
@@ -37,15 +39,17 @@
 
 .menuUser {
     width: 100%;
-    height: 200px;
+    height: auto;
     border-radius: 5px;
     border: 2px solid white;
+    padding: 10px 0;
     position: absolute;
     top: calc(100% + 5px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    gap: 10px;
 
     background-position: 0px 0px;
     background-image: linear-gradient(88deg, rgb(17, 17, 49) 0%, rgb(33, 38, 90) 100%);
