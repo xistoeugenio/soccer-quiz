@@ -1,5 +1,5 @@
 
-export const list = [
+export const listLeagues = [
     {
         id: 1,
         title: "Premier League",
@@ -117,6 +117,10 @@ export const countries = [
     {
         id: 7,
         title: "Portugal",
+    },
+    {
+        id: 8,
+        title: "Spain",
     },
 ];
 

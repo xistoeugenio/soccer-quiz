@@ -2,6 +2,7 @@ import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
 import { makeRequest } from "../../axios"
 import { GameContext } from "../../context/gameContext"
+import { GameModeContext } from "../../context/GameModeContext"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
 import BackCard from "../backCard/BackCard"
 import Defeat from "../defeat/Defeat"
@@ -10,7 +11,7 @@ import "./game.scss"
 
 export default function Game() {
 
-  const { dispatchPlayer, player } = useContext(SinglePlayerContext)
+  const { dispatchPlayer } = useContext(SinglePlayerContext)
   const { dispatchGame, score, start, options } = useContext(GameContext)
   const [loading, setLoading] = useState(false)
   const [loadingOption, setLoadingOption] = useState(false)
@@ -18,11 +19,27 @@ export default function Game() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [match, setMacth] = useState(null)
 
+  const { selectedLeagues, selectedCountries, mode } = useContext(GameModeContext)
+
+  const setPath = (mode) => {
+    switch (mode) {
+      case "brazilian":
+        return "/game?mode=brazilian"
+        break;
+      case "custom":
+        return `/game?leagues=${selectedCountries}&countries=${selectedCountries}&mode=custom`
+        break;
+      default:
+        return "/game"
+        break;
+    }
+  }
+
 
   const initGame = async () => {
     setLoading(true)
     try {
-      const response = await makeRequest.get("/game")
+      const response = await makeRequest.get(setPath(mode))
       const data = response.data
       dispatchGame({ type: "START_GAME", payload: data.options })
       dispatchPlayer({

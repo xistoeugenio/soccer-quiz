@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { leagues, list, countries, positions } from "../../dataPlayers";
+import { leagues, countries, positions, listLeagues } from "../../dataPlayers";
 import "./addPlayer.scss";
 import { makeRequest } from "../../axios";
 import { CircularProgress } from "@mui/material";
@@ -90,7 +90,7 @@ export default function AddPlayer() {
                     ))}
                 </select>
                 <select name="league" id="" className="input" onChange={handleLeague}>
-                    {list.map((item) => (
+                    {listLeagues.map((item) => (
                         <option
                             selected={item.title === values.league}
                             value={item.title}
