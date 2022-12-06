@@ -58,40 +58,46 @@ export default function GameMode() {
         <button className="customBtn" onClick={() => { changeMode("custom") }}>Custom mode</button>
       </div>
         :
-        <form className="CustomMode" onSubmit={startGame}>
-          <fieldset className="leagueContainer">
-            <legend>league</legend>
-            {listLeagues.map((league) => (
-              <>
-                <input
-                  type="checkbox"
-                  id={league.title}
-                  onChange={handleChangeLeague}
-                  name={league.title}
-                  checked = {selectedLeagues.includes(league.title)}
-                />
-                <label htmlFor={league.title}>{league.title}</label><br />
-              </>
-            ))}
-          </fieldset>
-          <fieldset className="CountryContainer" >
-            <legend>Country</legend>
-            {countries.map((country) => (
-              <>
-                <input
-                  type="checkbox"
-                  id={country.id}
-                  onChange={handleChangeCountry}
-                  name={country.title}
-                  checked = {selectedCountries.includes(country.title)}
-                />
-                <label htmlFor={country.id}>{country.title}</label><br />
-              </>
-            ))}
-          </fieldset>
-          {showError && <p>you must mark at least a league and a Country</p>}
-          <button type="submit">start</button>
-        </form>}
+        <>
+          <form className="CustomMode" onSubmit={startGame}>
+            <div className="fields">
+              <fieldset className="leagueContainer">
+                <legend>league</legend>
+                {listLeagues.map((league) => (
+                  <div className="item">
+                    <input
+                      type="checkbox"
+                      id={league.title}
+                      onChange={handleChangeLeague}
+                      name={league.title}
+                      checked={selectedLeagues.includes(league.title)}
+                    />
+                    <label htmlFor={league.title}>{league.title}</label><br />
+                  </div>
+                ))}
+              </fieldset>
+              <fieldset className="CountryContainer" >
+                <legend>Country</legend>
+                {countries.map((country) => (
+                  <div className="item">
+                    <input
+                      type="checkbox"
+                      id={country.id}
+                      onChange={handleChangeCountry}
+                      name={country.title}
+                      checked={selectedCountries.includes(country.title)}
+                    />
+                    <label htmlFor={country.id}>{country.title}</label><br />
+                  </div>
+                ))}
+              </fieldset>
+            </div>
+            <button type="submit" className="start">start</button>
+            {showError && <p className="error">you must mark at least a league and a Country</p>}
+          </form>
+
+        </>
+      }
     </div>
   )
 }

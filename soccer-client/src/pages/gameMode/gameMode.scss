@@ -1,11 +1,14 @@
-.gameModeContainer{
+@import "../../global.scss";
+
+.gameModeContainer {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    .optionsMode{
+    .optionsMode {
         //background-color: aqua;
         width: 200px;
         height: 275px;
@@ -14,7 +17,7 @@
         align-items: center;
         justify-content: space-between;
 
-        button{
+        button {
             background-color: aqua;
             width: 100%;
             height: 60px;
@@ -23,21 +26,83 @@
             font-size: 20px;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 background: rgba(0, 0, 0, 0.596);
                 color: white;
             }
         }
     }
 
-    .CustomMode{
-        background-color: brown;
-        width: 200px;
+    .CustomMode {
+        //background-color: brown;
+        width: auto;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
 
-        fieldset{
-            width: 100%;
-            height: auto;
+        .fields {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            fieldset {
+                background-color: rgba(0, 0, 0, 0.678);
+                width: auto;
+                //min-width: 125px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border-radius: 5px;
+                gap: 5px;
+                padding: 6px;
+                padding-top: 15px;
+
+                legend {
+                    background-color: aqua;
+                    padding: 3px 7px;
+                    border-radius: 5px;
+                    border: 2px solid black;
+                }
+
+                .item {
+
+                    input {
+                        cursor: pointer;
+
+                    }
+
+                    label {
+                        color: white;
+                        font-size: 18px;
+                        margin-left: 5px;
+                        cursor: pointer;
+
+                        @include mobile{
+                            font-size: 15px;
+                        }
+
+                    }
+                }
+            }
         }
+
+        .start {
+            background-color: green;
+            color: white;
+            font-size: 26px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 10px;
     }
 }

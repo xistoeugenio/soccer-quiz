@@ -1,11 +1,8 @@
 import { useContext } from 'react'
 import { GameContext } from '../../context/gameContext'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import './defeat.scss'
 
-const reload = () => {
-    window.location.reload()
-}
 
 export default function Defeat() {
     const { score } = useContext(GameContext)
@@ -23,14 +20,17 @@ export default function Defeat() {
                         <span>Good luck next time.</span>
                     </div>
                     <div className="buttons">
-                        <button onClick={reload}>
-                            Try again
-                        </button>
-                        <Link to="/">
-                        <button className="home">
-                            Home
-                        </button>
+                        <Link to="/game_mode">
+                            <button >
+                                Try again
+                            </button>
                         </Link>
+                        <Link to="/">
+                            <button className="home">
+                                Home
+                            </button>
+                        </Link>
+
                     </div>
 
                 </div>
