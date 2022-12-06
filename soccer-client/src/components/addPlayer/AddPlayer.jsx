@@ -30,6 +30,8 @@ export default function AddPlayer() {
             setValues({ ...values, team: "Arsenal", league: "Premier League" })
         } else if (e.target.value === "La Liga") {
             setValues({ ...values, team: "Atletico", league: "La Liga" })
+        } else if (e.target.value === "Serie A") {
+            setValues({ ...values, team: "Juventus", league: "Serie A" })
         }
     }
 
@@ -40,6 +42,9 @@ export default function AddPlayer() {
                 break
             case "La Liga":
                 setData(leagues.LaLiga);
+                break
+            case "Serie A":
+                setData(leagues.SerieA);
                 break
             default:
                 setData(leagues.premierLeague)

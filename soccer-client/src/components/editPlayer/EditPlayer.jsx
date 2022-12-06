@@ -37,6 +37,8 @@ export default function EditPlayer() {
             setValues({ ...values, team: "Arsenal", league: "Premier League" })
         } else if (e.target.value === "La Liga") {
             setValues({ ...values, team: "Atletico", league: "La Liga" })
+        } else if (e.target.value === "Serie A") {
+            setValues({ ...values, team: "Juventus", league: "Serie A" })
         }
     }
 
@@ -47,6 +49,9 @@ export default function EditPlayer() {
                 break
             case "La Liga":
                 setData(leagues.LaLiga);
+                break
+            case "Serie A":
+                setData(leagues.SerieA);
                 break
             default:
                 setData(leagues.premierLeague)
@@ -62,7 +67,7 @@ export default function EditPlayer() {
         setLoading(true)
         e.preventDefault()
         try {
-            await makeRequest.put("/players/"+ player._id, values)
+            await makeRequest.put("/players/" + player._id, values)
             navigate("/players")
         } catch (error) {
             alertMessage()

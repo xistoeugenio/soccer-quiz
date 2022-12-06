@@ -32,7 +32,8 @@
                     height: 50px;
                     margin-bottom: 5px;
                     border-radius: 5px;
-                    box-shadow: 6px 6px 7px rgb(34, 33, 33);
+                    //box-shadow: 6px 6px 7px rgb(34, 33, 33);
+                    filter: drop-shadow(6px 6px 7px rgb(34, 33, 33));
 
                     &.flag {
                         width: auto;

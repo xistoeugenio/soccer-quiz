@@ -27,14 +27,13 @@ export default function Game() {
         return "/game?mode=brazilian"
         break;
       case "custom":
-        return `/game?leagues=${selectedCountries}&countries=${selectedCountries}&mode=custom`
+        return `/game?mode=custom&leagues=${selectedLeagues}&countries=${selectedCountries}`
         break;
       default:
         return "/game"
         break;
     }
   }
-
 
   const initGame = async () => {
     setLoading(true)
@@ -67,7 +66,7 @@ export default function Game() {
       setLoadingOption(true)
     }
     try {
-      const response = await makeRequest.get("/game")
+      const response = await makeRequest.get(setPath(mode))
       const data = response.data
       dispatchGame({ type: "NEW_OPTIONS", payload: data.options })
       dispatchPlayer({

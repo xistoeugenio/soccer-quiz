@@ -8,6 +8,10 @@ export const listLeagues = [
         id: 2,
         title: "La Liga",
     },
+    {
+        id: 3,
+        title: "Serie A",
+    },
 ];
 
 export const leagues = {
@@ -62,29 +66,64 @@ export const leagues = {
     ],
     LaLiga: [
         {
-            id: 10,
+            id: 11,
             title: "Atletico",
             img: "assets/atletico.jpg",
         },
         {
-            id: 11,
+            id: 12,
             title: "Barcelona",
             img: "assets/teamImgs/barcelona.jpg",
         },
         {
-            id: 12,
+            id: 13,
             title: "Real Betis",
             img: "assets/realBetis.jpg",
         },
         {
-            id: 13,
+            id: 14,
             title: "Real Madrid",
             img: "assets/realMadrid.jpg",
         },
         {
-            id: 14,
+            id: 15,
             title: "Real Sociedad",
             img: "assets/realSociedad.jpg",
+        },
+    ],
+    SerieA: [
+        {
+            id: 11,
+            title: "Fiorentina",
+        },
+        {
+            id: 12,
+            title: "Internazionale",
+        },
+        {
+            id: 13,
+            title: "Juventus",
+        },
+        {
+            id: 14,
+            title: "Lazio",
+        },
+        {
+            id: 15,
+            title: "Milan",
+        },
+        {
+            id: 16,
+            title: "Napoli",
+        },
+        {
+            id: 17,
+            title: "Roma",
+        },
+        {
+            id: 18,
+            title: "Sampdoria",
+            
         },
     ]
 }
@@ -116,12 +155,26 @@ export const countries = [
     },
     {
         id: 7,
-        title: "Portugal",
+        title: "Italy",
     },
     {
         id: 8,
+        title: "Netherlands",
+    },
+    
+    {
+        id: 9,
+        title: "Portugal",
+    },
+    {
+        id: 10,
         title: "Spain",
     },
+    {
+        id: 11,
+        title: "Uruguay",
+    },
+
 ];
 
 export const positions = [
