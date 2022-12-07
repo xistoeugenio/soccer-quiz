@@ -3,20 +3,27 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../../context/AuthContext"
 import "./menu.scss"
 
-export function MenuActions() {
+export function MenuActions({ setOpenMenu, verifyPage }) {
+
   return (
     <div className="menuActions">
       <ul className="actionsList">
-        <li>
-          <Link to="/about_us" className="text">About Us</Link>
-        </li>
-        <li>
+        {verifyPage ?
+          <li onClick={() => { setOpenMenu(false) }}>
+            <Link to="/" className="text" >Home</Link>
+          </li>
+          :
+          <li onClick={() => { setOpenMenu(false) }}>
+            <Link to="/about_us" className="text" >About Us</Link>
+          </li>
+        }
+        <li onClick={() => { setOpenMenu(false) }}>
           <Link to="/add" className="text">Add player</Link>
         </li>
-        <li>
+        <li onClick={() => { setOpenMenu(false) }}>
           <Link to="/players" className="text">Players</Link>
         </li>
-
+        <span className="version">version 1.0.0</span>
       </ul>
     </div>
   )

@@ -16,7 +16,7 @@
     background-image: linear-gradient(88deg, rgb(17, 17, 49) 0%, rgb(33, 38, 90) 100%);
 
     .leftContainer {
-        width: 45%;
+        width: 50%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -35,6 +35,26 @@
             align-items: center;
             justify-content: center;
 
+            &.about {
+                background-color: #13aaaa;
+
+                &:hover {
+                    color: #13aaaa;
+                    border: 2px solid #13aaaa;
+                }
+
+            }
+
+            &.home {
+                background-color: #60c960;
+
+                &:hover {
+                    color: #60c960;
+                    border: 2px solid #60c960;
+                }
+
+            }
+
             &:hover {
                 background: none;
                 color: white;
@@ -42,7 +62,8 @@
             }
 
             @include notebook {
-                width: 40%;
+                width: 30%;
+                font-size: 13px;
             }
         }
 
@@ -52,6 +73,7 @@
             height: 40px;
             border: none;
             display: none;
+            cursor: pointer;
 
             .icon {
                 color: white;
