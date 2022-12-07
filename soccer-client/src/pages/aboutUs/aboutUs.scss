@@ -1,67 +1,109 @@
-.aboutContainer{
-    background-color: blue;
+.aboutContainer {
+    box-sizing: border-box;
     width: 750px;
     height: 460px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid dodgerblue;
 
-    .aboutTopContainer{
-        background-color: red;
+    background: #000000;
+    background: -moz-linear-gradient(45deg, #040013 0%, #150A4B 50%, #2A1D67 100%);
+    background: -webkit-linear-gradient(45deg, #040013 0%, #150A4B 50%, #2A1D67 100%);
+    background: linear-gradient(45deg, #040013 0%, #150A4B 50%, #2A1D67 100%);
+
+    .aboutTopContainer {
+        //background-color: red;
         width: 100%;
-        height: 40%;
+        height: 38%;
         display: flex;
         justify-content: space-between;
 
-        .imgContainer{
+        .imgContainer {
+            box-sizing: border-box;
             background-color: aqua;
             width: auto;
             height: 100%;
+            border-radius: 10px;
+            border: 2px solid aqua;
 
-            img{
+            img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                border-radius: 10px;
             }
         }
 
-        .textTopContainer{
-            background-color: aqua;
+        .textTopContainer {
+            //background-color: aqua;
             width: 70%;
             height: 100%;
-            
-            p{
-                font-size: 25px;
+
+            p {
+                color: white;
+                font-size: 23px;
                 line-height: 40px;
+            }
+
+            a {
+                color: dodgerblue;
             }
         }
     }
 
-    .aboutBottomContainer{
-        background-color: red;
+    .aboutBottomContainer {
+        //background-color: red;
         width: 100%;
         height: 55%;
         display: flex;
         justify-content: space-between;
 
-        .infoContainer{
-            background-color: aqua;
+        .infoContainer {
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.555);
             height: 100%;
             width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid aqua;
+
+            h2 {
+                color: aqua;
+                cursor: default;
+            }
+
+            a {
+                color: dodgerblue;
+            }
         }
-        .textBottomContainer{
-            background-color: aqua;
+
+        .textBottomContainer {
+            //background-color: aqua;
             height: 100%;
             width: 60%;
             display: flex;
             flex-direction: column;
 
-            p{
-                font-size: 25px;
+            p {
+                color: white;
+                font-size: 23px;
                 line-height: 40px;
             }
-            a{
+
+            a {
+                background-color: rgb(48, 88, 48);
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                border: 2px solid aqua;
                 align-self: center;
+                padding: 2px 8px;
             }
         }
     }
