@@ -49,7 +49,7 @@ export const getPlayer = async (req, res, next) => {
 export const getAllPlayer = async (req, res, next) => {
 
     try {
-        const player = await Player.find()
+        const player = await Player.find().sort({"team": 1, "name": 1})
         res.status(200).json(player)
     } catch (err) {
         next(err)

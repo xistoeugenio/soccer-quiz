@@ -8,11 +8,15 @@ export function MenuActions() {
     <div className="menuActions">
       <ul className="actionsList">
         <li>
-          <Link to="/players" className="text">Players</Link>
+          <Link to="/about_us" className="text">About Us</Link>
         </li>
         <li>
           <Link to="/add" className="text">Add player</Link>
         </li>
+        <li>
+          <Link to="/players" className="text">Players</Link>
+        </li>
+
       </ul>
     </div>
   )

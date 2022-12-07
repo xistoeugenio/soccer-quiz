@@ -27,6 +27,7 @@ export default function Navbar({ searchBar }) {
     return (
         <div className="Navbar">
             <div className="leftContainer">
+                <Link to="/about_us" className="button">About Us</Link>
                 <Link to="/add" className="button">Add Player</Link>
                 <Link to="/players" className="button">Players</Link>
                 <button className="menuBtn" onClick={() => {
