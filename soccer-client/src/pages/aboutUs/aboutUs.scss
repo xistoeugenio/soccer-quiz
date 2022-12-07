@@ -1,7 +1,11 @@
+@import "../../global.scss";
+
 .aboutContainer {
     box-sizing: border-box;
     width: 750px;
+    max-width: 95%;
     height: 460px;
+    max-height: 98%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -108,4 +112,112 @@
         }
     }
 
+    @include notebook {
+        width: 480px;
+        height: 390px;
+        padding: 10px;
+
+        .aboutTopContainer {
+            height: 55%;
+            justify-content: space-around;
+            gap: 6%;
+
+            .imgContainer {
+                width: 30%;
+                min-width: 30%;
+            }
+
+            .textTopContainer {
+                width: 310px;
+
+                p {
+                    font-size: 22px;
+                    line-height: 30px;
+                }
+            }
+        }
+
+        .aboutBottomContainer {
+
+            height: 38%;
+
+            .infoContainer {
+                min-width: 220px;
+                display: none;
+
+                h2 {
+
+                    font-size: 18px;
+                }
+
+                a {
+                    font-size: 14px;
+                }
+            }
+
+            .textBottomContainer {
+                width: 100%;
+
+                p {
+                    font-size: 22px;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+
+    @include tablet {
+        width: auto;
+        height: 95%;
+        max-height: 450px;
+        justify-content: center;
+        gap: 7px;
+
+
+        .aboutTopContainer {
+            flex-direction: column;
+            align-items: center;
+            max-width: 300px;
+            justify-content: space-between;
+            padding: 0;
+
+            .imgContainer {
+                width: 35%;
+                height: auto;
+            }
+
+            .textTopContainer {
+                width: 100%;
+                height: auto;
+
+                p {
+                    font-size: 17px;
+                    line-height: 20px;
+
+                    @media (max-width: 300px) {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+
+        .aboutBottomContainer {
+            height: auto;
+            max-width: 300px;
+
+            .textBottomContainer {
+                gap: 15px;
+
+                p {
+                    font-size: 17px;
+                    line-height: 20px;
+
+                    @media (max-width: 300px) {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+
+    }
 }
