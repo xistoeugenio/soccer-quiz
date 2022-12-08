@@ -52,51 +52,51 @@
             cursor: default;
         }
     }
+}
 
-    .menuUser {
-        width: 100%;
-        height: auto;
-        border-radius: 5px;
-        border: 2px solid white;
-        padding: 10px 0;
-        position: absolute;
-        top: calc(100% + 5px);
+.menuUser {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid white;
+    padding: 10px 0;
+    position: absolute;
+    top: calc(100% + 5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+
+    background-position: 0px 0px;
+    background-image: linear-gradient(88deg, rgb(17, 17, 49) 0%, rgb(33, 38, 90) 100%);
+
+
+    .actionsList {
+        width: 70%;
+        height: 75%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        gap: 10px;
+        list-style: none;
 
-        background-position: 0px 0px;
-        background-image: linear-gradient(88deg, rgb(17, 17, 49) 0%, rgb(33, 38, 90) 100%);
-
-
-        .actionsList {
-            width: 70%;
-            height: 75%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-            list-style: none;
-
-            li {
-                background-color: beige;
-                border-radius: 5px;
-                padding: 2px 6px;
-            }
-        }
-
-        .logout {
-            padding: 3px 8px;
-            font-size: 18px;
-            color: white;
-            border: 1px solid white;
+        li {
+            background-color: beige;
             border-radius: 5px;
-            cursor: pointer;
-
-            background: rgb(57, 34, 34);
-            background: linear-gradient(45deg, rgba(57, 34, 34, 1) 0%, rgba(110, 35, 35, 1) 39%, rgba(176, 43, 43, 1) 99%);
+            padding: 2px 6px;
         }
+    }
+
+    .logout {
+        padding: 3px 8px;
+        font-size: 18px;
+        color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+        cursor: pointer;
+
+        background: rgb(57, 34, 34);
+        background: linear-gradient(45deg, rgba(57, 34, 34, 1) 0%, rgba(110, 35, 35, 1) 39%, rgba(176, 43, 43, 1) 99%);
     }
 }

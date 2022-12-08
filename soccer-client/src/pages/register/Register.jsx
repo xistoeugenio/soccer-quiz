@@ -41,8 +41,14 @@ export default function Register() {
         <input type="text" name="username" onChange={handleChange} required />
         <label>Password</label>
         <input type="text" name="password" onChange={handleChange} required />
-        {loading ? <CircularProgress /> :
-          <button type="submit">Register</button>}
+          {loading ? <CircularProgress /> :
+          <div className="buttons">
+            <Link to="/">
+              <button className="back">back</button>
+            </Link>
+            <button type="submit">Register</button>
+          </div>
+        }
       </form>
       {error ?
         <p className="error">

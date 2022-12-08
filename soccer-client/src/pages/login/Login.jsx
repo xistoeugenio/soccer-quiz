@@ -41,7 +41,13 @@ export default function Login() {
         <label>Password</label>
         <input type="text" name="password" onChange={handleChange} required />
         {loading ? <CircularProgress /> :
-          <button type="submit">sign in</button>}
+          <div className="buttons">
+            <Link to="/">
+              <button className="back">back</button>
+            </Link>
+            <button type="submit">sign in</button>
+          </div>
+        }
 
       </form>
       {
