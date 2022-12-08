@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
@@ -29,6 +30,7 @@ const SinglePlayerReducer = (state, action) => {
 
 export const SinglePlayerProvider = ({ children }) => {
     const [state, dispatchPlayer] = useReducer(SinglePlayerReducer, INITIAL_STATE);
+    const [searchPlayer, setSearchPlayer] = useState(null)
 
 
     return (
@@ -36,6 +38,8 @@ export const SinglePlayerProvider = ({ children }) => {
             value={{
                 player: state.player,
                 dispatchPlayer,
+                searchPlayer,
+                setSearchPlayer
             }}
         >
             {children}

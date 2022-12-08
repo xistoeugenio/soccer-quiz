@@ -1,7 +1,11 @@
+import { Add } from '@mui/icons-material'
 import { Skeleton } from '@mui/material'
 import { useState } from 'react'
+import { useContext } from 'react'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { makeRequest } from '../../axios'
+import { SinglePlayerContext } from '../../context/SinglePlayerContext'
 import Modal from '../modal/Modal'
 import './searchResults.scss'
 
@@ -24,7 +28,12 @@ export default function SearchResults() {
         }
         fetchData()
     }, [])
-    console.log(process.env.REACT_APP_URL_API)
+
+    /*This part is responsible to search player  */
+    const { searchPlayer } = useContext(SinglePlayerContext)
+    const filterPlayers = searchPlayer?.length > 0
+        ? data.filter(player => player.name.toLowerCase().includes(searchPlayer.toLowerCase()))
+        : data
 
 
     return (
@@ -39,7 +48,7 @@ export default function SearchResults() {
                             variant='rectangular' />
                     ))
                     :
-                    data.map((item) => (
+                    filterPlayers.map((item) => (
                         <div className='smallPlayerContainer'
                             onClick={
                                 () => {
@@ -57,6 +66,13 @@ export default function SearchResults() {
                             </div>
                         </div>
                     ))}
+                <Link to="/add">
+                    <div className="addPlayerContainer">
+                        <div className="plusContainer">
+                            <Add className='icon' />
+                        </div>
+                    </div>
+                </Link>
             </div>
             {showModal && <Modal setShowModal={setShowModal} currentPlayer={currentPlayer} />}
         </div>

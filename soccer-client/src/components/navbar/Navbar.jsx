@@ -4,6 +4,7 @@ import "./navbar.scss"
 import { MenuActions, MenuUser } from "../menu/Menu";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { SinglePlayerContext } from "../../context/SinglePlayerContext";
 
 export default function Navbar({ searchBar }) {
     const [openMenu, setOpenMenu] = useState(false)
@@ -73,6 +74,8 @@ export default function Navbar({ searchBar }) {
 }
 
 export function SearchBar() {
+    const { setSearchPlayer, searchPlayer } = useContext(SinglePlayerContext)
+     
     return (
         <div className="Navbar search">
             <div className="leftContainer">
@@ -85,6 +88,8 @@ export function SearchBar() {
                         type="text"
                         className="searchInput"
                         placeholder="Search for a player..."
+                        onChange={e => setSearchPlayer(e.target.value)}
+                        value={searchPlayer}
                     />
                 </div>
             </div>
