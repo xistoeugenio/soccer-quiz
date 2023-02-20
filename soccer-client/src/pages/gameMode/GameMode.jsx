@@ -53,7 +53,7 @@ export default function GameMode() {
   return (
     <div className="gameModeContainer">
       {!showCustom ? <div className="optionsMode">
-        <button className="defaultBtn" onClick={() => { changeMode() }}>Default</button>
+        <button className="defaultBtn" onClick={() => { changeMode() }}>Randon</button>
         <button className="brazilianBtn" onClick={() => { changeMode("brazilian") }}>Brazilian mode</button>
         <button className="customBtn" onClick={() => { changeMode("custom") }}>Custom mode</button>
       </div>

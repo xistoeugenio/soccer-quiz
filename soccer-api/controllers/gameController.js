@@ -1,5 +1,6 @@
 import Player from "../models/Player.js";
 import Match from "../models/Match.js";
+import RankedMatches from "../models/RankedMatches.js";
 
 const randomNumber = (number, number2, number3) => {
     var ranNum = Math.floor(Math.random() * 20 + 1);
@@ -55,6 +56,21 @@ const randomOptions = (value) => {
     return newMatch
 }
 
+export const startRankedMatch = async (req, res, next) => {
+    const data = await Player.find()
+    const firstRound =randomOptions(data)
+    const MatchConfig ={
+        rounds:[firstRound],
+        currentRound: firstRound,
+        started: true,
+        finished: false,
+        skips: 3
+    }
+    const newMatch = new RankedMatches(MatchConfig)
+
+    return res.status(200).json({newMatch})
+}
+
 export const startMatch = async (req, res, next) => {
     const { mode } = req.query
 
@@ -62,8 +78,8 @@ export const startMatch = async (req, res, next) => {
     const countries = req.query.countries?.split(",")
     const leagues = req.query.leagues?.split(",")
     try {
-        if(!mode){
-            data= await Player.find()
+        if (!mode) {
+            data = await Player.find()
         }
 
         if (mode === "brazilian") {
