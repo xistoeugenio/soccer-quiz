@@ -56,20 +56,50 @@ const randomOptions = (value) => {
     return newMatch
 }
 
+//this function was moved to rankedMatchcontroller
+/*
 export const startRankedMatch = async (req, res, next) => {
+
     const data = await Player.find()
     const firstRound =randomOptions(data)
+
+    //this is the initial config to our match
     const MatchConfig ={
         rounds:[firstRound],
         currentRound: firstRound,
         started: true,
         finished: false,
+        score: 0,
         skips: 3
     }
     const newMatch = new RankedMatches(MatchConfig)
 
+
+    const newRound =async (idMatch)=> {
+        //Add another round to rounds array and change the currentRound
+        const newRound = randomOptions(data)
+        MatchConfig.rounds.push(newRound)
+        MatchConfig.currentRound = newRound
+
+        await RankedMatches.findByIdAndUpdate(idMatch, {$set: MatchConfig})
+    }
+
+    const verifyAnswer = ()=>{
+
+    }
+
+    
+    const skipAnswer = (MatchObject)=>{
+        if (MatchObject.skips > 0) {
+            //change Match object decreasing the amounts of SKIPS
+            newRound()
+        } else {
+            //return a error, showing too user that he does not have skips enough
+        }
+    }
+
     return res.status(200).json({newMatch})
-}
+}*/
 
 export const startMatch = async (req, res, next) => {
     const { mode } = req.query

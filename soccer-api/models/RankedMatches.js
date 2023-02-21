@@ -17,6 +17,10 @@ const RankedMatches = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    score: {
+        type: Number,
+        required: true
+    },
     skips: {
         type: Number,
         required: true

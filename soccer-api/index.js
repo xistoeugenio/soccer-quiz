@@ -7,6 +7,7 @@ import playersRoute from "./routes/players.js"
 import usersRoute from "./routes/users.js"
 import authRoutes from "./routes/auth.js"
 import gameRoute from "./routes/game.js"
+import rankedMatchRoute from "./routes/rankedMatch.js"
 
 const app = express()
 dotenv.config()
@@ -40,6 +41,7 @@ app.use(express.json())
 app.use("/api/players", playersRoute)
 app.use("/api/users", usersRoute)
 app.use("/api/game", gameRoute)
+app.use("/api/ranked", rankedMatchRoute)
 app.use("/api", authRoutes)
 
 
