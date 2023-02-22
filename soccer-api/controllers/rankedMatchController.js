@@ -50,47 +50,91 @@ const randomOptions = (value) => {
 
 const newRound = async (idMatch) => {
     //Add another round to rounds array and change the currentRound
+    const data = await Player.find()
+    const MatchConfig = await RankedMatches.findById(idMatch)
+
     const newRound = randomOptions(data)
-    MatchConfig.rounds.push(newRound)
+    MatchConfig?.rounds.push(newRound)
     MatchConfig.currentRound = newRound
 
     await RankedMatches.findByIdAndUpdate(idMatch, { $set: MatchConfig })
+
+
+    //return res.status(200).json({ MatchConfig })
+
+    return ({ MatchConfig })
+
+
+}
+
+const skipRound = async (match_id) => {
+
+    const Match = await RankedMatches.findById(match_id)
+    const skipAnswer = async (MatchObject) => {
+        if (MatchObject.skips > 0) {
+            //change Match object decreasing the amounts of SKIPS
+            await RankedMatches.findByIdAndUpdate(MatchObject.id, { $set: { skips: MatchObject.skips - 1 } })
+
+            return (newRound(match_id))
+        } else {
+            //return a error, showing to user that he does not have skips enough
+        }
+    }
+
+    skipAnswer(Match)
+}
+
+const verifyAnswer = async (match_id, player_id) => {
+
+
+    const currentMacth = await RankedMatches.findById(match_id)
+    var response = null
+
+    if (currentMacth.currentRound.rightAnswer.id === player_id) {
+
+        return (newRound(match_id))
+
+    } else {
+        response = "wrong"
+    }
+
+    //res.status(200).json(response);
+
+    return response
+
 }
 
 
 
 export const startRankedMatch = async (req, res, next) => {
 
-    const data = await Player.find()
-    const firstRound = randomOptions(data)
+    const { match_id, player_id, skip } = req.query
 
-    //this is the initial config to our match
-    const MatchConfig = {
-        rounds: [firstRound],
-        currentRound: firstRound,
-        started: true,
-        finished: false,
-        score: 0,
-        skips: 3
-    }
-    const newMatch = new RankedMatches(MatchConfig)
+    if (skip === "true" && match_id) {
 
-    return res.status(200).json({ newMatch })
-}
+        return res.status(200).json(skipRound(match_id))
 
+    } else if ((match_id && player_id) && !skip) {
 
+        return res.status(200).json(verifyAnswer(match_id, player_id))
+        
+    } else {
+        const data = await Player.find()
+        const firstRound = randomOptions(data)
 
-export const verifyAnswer = async (req, res, next) => {
-}
-
-export const skipRound = async (req, res, next) => {
-    const skipAnswer = (MatchObject) => {
-        if (MatchObject.skips > 0) {
-            //change Match object decreasing the amounts of SKIPS
-            newRound()
-        } else {
-            //return a error, showing too user that he does not have skips enough
+        //this is the initial config to our match
+        const MatchConfig = {
+            rounds: [firstRound],
+            currentRound: firstRound,
+            started: true,
+            finished: false,
+            score: 0,
+            skips: 3
         }
+        const newMatch = new RankedMatches(MatchConfig)
+        const savedMacth = await newMatch.save()
+
+        return res.status(200).json({ savedMacth })
     }
-    skipAnswer()
+
 }
