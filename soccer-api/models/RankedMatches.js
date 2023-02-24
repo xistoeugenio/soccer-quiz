@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const RankedMatches = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
     rounds: {
         type: Array,
         required: true
