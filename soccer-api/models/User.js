@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    rankedMatchesPlayed:{
+        type: Array,
+        default: []
+    },
     isAdmin: {
         type: Boolean,
         default: false

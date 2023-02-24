@@ -69,6 +69,19 @@ const newRound = async (idMatch) => {
 
 }
 
+const updateUserMatches = async (match_id, user_id) => {
+    const MatchFinished = await RankedMatches.findById(match_id)
+    const userData = await User.findById(user_id)
+
+    userData.rankedMatchesPlayed.push(MatchFinished)
+
+    await User.findByIdAndUpdate(
+        user_id, { $set: userData}
+    )
+    //const userMatches = userData.rankedMatchesPlayed
+    console.log(userData.rankedMatchesPlayed)
+}
+
 const skipRound = async (match_id) => {
 
     const Match = await RankedMatches.findById(match_id)
@@ -92,7 +105,7 @@ const Defeat = async (match_id) => {
         Match.id, { $set: { finished: true, currentRound: [] } }
     )
     //this step is responsible to add the last match to user data.
-
+    updateUserMatches(match_id, Match.userId)
     //clean current round
 
     //
@@ -150,7 +163,6 @@ export const startRankedMatch = async (req, res, next) => {
         case "start":
             const data = await Player.find()
             const firstRound = randomOptions(data)
-            const userId = null
 
             //this step get the user Id from a cookie called access_token
             jwt.verify(req.cookies.access_token, process.env.JWT, (err, user) => {
@@ -169,6 +181,12 @@ export const startRankedMatch = async (req, res, next) => {
             }
             const newMatch = new RankedMatches(MatchConfig)
             const savedMacth = await newMatch.save()
+
+            //this is responsible to finish the match after 1 min
+            setTimeout(() => {
+                if (!currentMacth.finished)
+                    Defeat(savedMacth.id)
+            }, 30000);
 
             return res.status(200).json({ savedMacth })
 
