@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 import { createError } from "./error.js";
 
 
@@ -53,12 +54,27 @@ export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, next)
 };
 
-export const returnUserId =(req)=>{
-  const token = req.cookies.access_token;
+export const isUserLoggedIn = (req, res, next) => {
 
+  const verifyToken = (req, res, next) => {
+    const token = req.cookies.access_token;
+    if (!token) {
+      return next(createError(401, "You are not authenticated!"));
+    }
 
-  jwt.verify(token, process.env.JWT, (err, user) => {
-    req.user = user;
-    return user
-  })
+    jwt.verify(token, process.env.JWT, (err, user) => {
+      if (err) return next(createError(403, "Token is not valid!"));
+      req.user = user
+
+      User.findById(user.id, function (err, user) {
+        if (err) throw err;
+        if (user) {
+          next()
+        } else {
+          console.log("User does not exist");
+        }
+      });
+    })
+  }
+  verifyToken(req, res, next)
 }

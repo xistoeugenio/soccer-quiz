@@ -19,6 +19,10 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    bestRankedScore:{
+        type: Number,
+        default: 0
+    },
     isAdmin: {
         type: Boolean,
         default: false

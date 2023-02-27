@@ -72,14 +72,17 @@ const newRound = async (idMatch) => {
 const updateUserMatches = async (match_id, user_id) => {
     const MatchFinished = await RankedMatches.findById(match_id)
     const userData = await User.findById(user_id)
-
+    //this add the last match to user's data
     userData.rankedMatchesPlayed.push(MatchFinished)
 
+    //this verify if the last match was his best ranked score
+    if (MatchFinished.score > userData.bestRankedScore) {
+        userData.bestRankedScore = MatchFinished.score
+    }
+
     await User.findByIdAndUpdate(
-        user_id, { $set: userData}
+        user_id, { $set: userData }
     )
-    //const userMatches = userData.rankedMatchesPlayed
-    console.log(userData.rankedMatchesPlayed)
 }
 
 const skipRound = async (match_id) => {
@@ -104,9 +107,10 @@ const Defeat = async (match_id) => {
     await RankedMatches.findByIdAndUpdate(
         Match.id, { $set: { finished: true, currentRound: [] } }
     )
+    console.log("finished")
     //this step is responsible to add the last match to user data.
     updateUserMatches(match_id, Match.userId)
-    //clean current round
+    //
 
     //
     return ("your score: " + Match.score)
@@ -139,59 +143,73 @@ const verifyAnswer = async (match_id, player_id) => {
 export const startRankedMatch = async (req, res, next) => {
 
     const { match_id, player_id, type_function } = req.query
-    const currentMacth = await RankedMatches.findById(match_id)
+    try {
+        const currentMacth = await RankedMatches.findById(match_id)
+
+        switch (type_function) {
+            case "skip":
+
+                if (!currentMacth.finished) {
+                    return res.status(200).json(await skipRound(match_id))
+                } else {
+                    return next(createError(500, "this match is already finished"))
+                }
+
+            case "verify":
+
+                if (!currentMacth.finished) {
+                    return res.status(200).json(await verifyAnswer(match_id, player_id))
+                } else {
+                    return next(createError(500, "this match is already finished"))
+                }
+
+            case "start":
+                const data = await Player.find()
+                const firstRound = randomOptions(data)
+
+                //this step get the user Id from a cookie called access_token
+                jwt.verify(req.cookies.access_token, process.env.JWT, (err, user) => {
+                    req.user = user
+                })
+
+                //this is the initial config to our match
+                const MatchConfig = {
+                    userId: req.user.id,
+                    rounds: [firstRound],
+                    currentRound: firstRound,
+                    started: true,
+                    finished: false,
+                    score: 0,
+                    skips: 20
+                }
+                const newMatch = new RankedMatches(MatchConfig)
+                const savedMacth = await newMatch.save()
+
+                //this is responsible to finish the match after 1 min
+                setTimeout(() => {
+                    if (!currentMacth?.finished)
+                        Defeat(savedMacth.id)
+                    console.log("done")
+                }, 30000);
+
+                return res.status(200).json({ savedMacth })
+
+            default:
+                return res.status(200).json("please select a valid function")
 
 
-
-
-    switch (type_function) {
-        case "skip":
-            if (!currentMacth.finished) {
-
-                return res.status(200).json(await skipRound(match_id))
-            } else {
-                return next(createError(500, "this match is already finished"))
-            }
-
-        case "verify":
-            if (!currentMacth.finished) {
-                return res.status(200).json(await verifyAnswer(match_id, player_id))
-            } else {
-                return next(createError(500, "this match is already finished"))
-            }
-
-        case "start":
-            const data = await Player.find()
-            const firstRound = randomOptions(data)
-
-            //this step get the user Id from a cookie called access_token
-            jwt.verify(req.cookies.access_token, process.env.JWT, (err, user) => {
-                req.user = user
-            })
-
-            //this is the initial config to our match
-            const MatchConfig = {
-                userId: req.user.id,
-                rounds: [firstRound],
-                currentRound: firstRound,
-                started: true,
-                finished: false,
-                score: 0,
-                skips: 20
-            }
-            const newMatch = new RankedMatches(MatchConfig)
-            const savedMacth = await newMatch.save()
-
-            //this is responsible to finish the match after 1 min
-            setTimeout(() => {
-                if (!currentMacth.finished)
-                    Defeat(savedMacth.id)
-            }, 30000);
-
-            return res.status(200).json({ savedMacth })
-
-        default:
-            return res.status(200).json("please select a valid function")
+        }
+    } catch (err) {
+        next(err)
     }
+}
 
+export const getTopPlayers = async (req, res, next) => {
+    const top10 = await User.find().sort({score: -1}).limit(10)
+
+    //this is responsible to return new object with only the username and bestRankedScore fields.
+    const newArray = top10.map(({username, bestRankedScore, ...rest})=>(
+        {username,bestRankedScore}
+    ))
+    return res.status(200).json(newArray)
 }
