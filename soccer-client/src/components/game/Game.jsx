@@ -25,13 +25,13 @@ export default function Game() {
     switch (mode) {
       case "brazilian":
         return "/game?mode=brazilian"
-        break;
+
       case "custom":
         return `/game?mode=custom&leagues=${selectedLeagues}&countries=${selectedCountries}`
-        break;
+
       default:
         return "/game"
-        break;
+
     }
   }
 

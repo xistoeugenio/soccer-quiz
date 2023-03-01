@@ -93,7 +93,7 @@ export default function GameMode() {
               </fieldset>
             </div>
             <button type="submit" className="start">start</button>
-            {showError && <p className="error">you must mark at least a league and a Country</p>}
+            {showError && <p className="error">you must select at least a league and a Country</p>}
           </form>
 
         </>
