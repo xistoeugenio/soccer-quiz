@@ -1,5 +1,6 @@
-import { createContext, useReducer } from "react";
-import { startGame, skipQuestion, verifyAnswer } from "./actions";
+import { createContext, useContext, useReducer } from "react";
+import { startGame, skipQuestion, verifyAnswer } from "../actions/actionsRankedMode";
+import { SinglePlayerContext } from "./SinglePlayerContext";
 
 // Define action types as constants
 const SET_MATCH_DATA = "SET_MATCH_DATA";
@@ -7,6 +8,7 @@ const SET_ERROR = "SET_ERROR";
 
 // Define initial state
 const initialState = {
+  id_match: null,
   rightAnswer: null,
   options: [],
   started: true,
@@ -22,6 +24,7 @@ const reducer = (state, action) => {
     case SET_MATCH_DATA:
       return {
         ...state,
+        id_match: action.payload.id_match,
         rightAnswer: action.payload.rightAnswer,
         options: action.payload.options,
         started: action.payload.started,
@@ -42,10 +45,12 @@ export const RankedMatchContext = createContext(initialState);
 
 export const RankedMatchProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { dispatchPlayer } = useContext(SinglePlayerContext)
 
   return (
     <RankedMatchContext.Provider
       value={{
+        id_match: state.id_match,
         rightAnswer: state.rightAnswer,
         options: state.options,
         started: state.started,
@@ -53,10 +58,10 @@ export const RankedMatchProvider = ({ children }) => {
         skips: state.skips,
         score: state.score,
         error: state.error,
-        startGame: () => startGame(dispatch),
-        skipQuestion: () => skipQuestion(dispatch),
+        startGame: () => startGame(dispatch, dispatchPlayer),
+        skipQuestion: () => skipQuestion(dispatch, dispatchPlayer),
         verifyAnswer: (match_id, player_id) =>
-          verifyAnswer(dispatch, match_id, player_id),
+          verifyAnswer(dispatch, match_id, player_id, dispatchPlayer),
       }}
     >
       {children}

@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import GameMode from "./pages/gameMode/GameMode";
 import AboutUs from "./pages/aboutUs/AboutUs";
+import RankedMode from "./components/rankedMode/RankedMode";
 
 const InitialPage = () => (
   <section className="PageContainer">
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
   {
     path: "/quiz",
     element: <Game />
+  },
+  {
+    path: "/ranked",
+    element: <RankedMode />
   },
   {
     path: "/login",

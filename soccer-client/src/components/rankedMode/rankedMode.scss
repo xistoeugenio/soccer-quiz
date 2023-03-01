@@ -1,0 +1,183 @@
+@import "../../global.scss";
+
+.game {
+    //background-color: white;
+    height: 80%;
+    min-height: 450px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .score {
+        //background-color: aqua;
+        align-self: flex-start;
+        width: 150px;
+        height: 50px;
+        margin-left: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h1 {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: rgb(255, 255, 255);
+            text-shadow: rgb(64, 116, 181) 2px 2px 0px,
+                #234a79 2px -2px 0px,
+                #234a79 -2px 2px 0px,
+                #234a79 -2px -2px 0px,
+                #234a79 2px 0px 0px,
+                #234a79 0px 2px 0px,
+                #234a79 -2px 0px 0px,
+                #234a79 0px -2px 0px;
+            --darkreader-inline-color: #e8e6e3;
+            --darkreader-inline-bgimage: initial;
+            --darkreader-inline-bgcolor: #181a1b;
+        }
+
+        h2 {
+            width: 40px;
+            height: 40px;
+            color: white;
+            font-weight: 500;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #24316b;
+            border: 2px white solid;
+        }
+    }
+
+    .gamerContainer {
+        width: 100%;
+        max-width: 650px;
+        height: calc(100% - 150px);
+        min-height: 340px;
+        max-height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .gamerLeft {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .backCardContainer {
+                box-shadow: 0px 0px 13px 4px #473e3ebf;
+                -webkit-box-shadow: 0px 0px 13px 4px #473e3ebf;
+                -moz-box-shadow: 0px 0px 13px 4px #473e3ebf;
+            }
+
+        }
+
+        .gamerRight {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .playersContainer {
+                height: 80%;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+
+                .playerButton {
+
+                    width: 200px;
+                    height: 40px;
+                    background-color: #25c264;
+                    color: rgb(36, 36, 36);
+                    font-weight: 500;
+                    font-size: 18px;
+                    border-radius: 5px;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                &.clicked {
+                    .playerButton {
+                        background-color: #a5ddbb;
+                        color: rgb(155, 140, 140);
+
+                        &.selected {
+                            background-color: #25c264;
+                            color: white;
+                        }
+
+                        &.right {
+                            background-color: green;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .skipButton {
+        background: rgb(57, 34, 34);
+        background: linear-gradient(45deg, rgba(57, 34, 34, 1) 0%, rgba(110, 35, 35, 1) 39%, rgba(176, 43, 43, 1) 99%);
+        width: 150px;
+        height: 50px;
+        font-size: 25px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    @include mobile {
+        height: 90%;
+        justify-content: space-between;
+
+        .gamerContainer {
+            width: 100%;
+            height: 75%;
+            max-height: 75%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+            .gamerLeft {
+                width: 220px;
+                min-width: 200px;
+                height: 300px;
+                min-height: 288px;
+
+                .backCardContainer {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .gamerRight {
+
+                height: calc(100% - 288px);
+                max-height: 200px;
+
+                .playersContainer {
+                    width: 100%;
+                    height: 100%;
+                    justify-content: space-evenly;
+
+                    .playerButton {
+                        width: 220px;
+                        height: 30px;
+                    }
+                }
+            }
+
+        }
+    }
+}
