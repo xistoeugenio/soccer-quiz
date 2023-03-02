@@ -53,10 +53,10 @@ export const login = async (req, res, next) => {
 
     res
       .cookie("access_token", token, {
-        //httpOnly: true,
-        //domain: 'www.socciz.online',
-        //sameSite: 'none',
-        //secure: true,
+        httpOnly: true,
+        //domain: 'www.socciz.online http://localhost:3000/ranked',
+        sameSite: 'none',
+        secure: true,
       })
       .status(200)
       .json({ details: { ...otherDetails }, isAdmin });
