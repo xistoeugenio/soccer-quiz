@@ -5,6 +5,7 @@ import { GameProvider } from './context/gameContext';
 import { SinglePlayerProvider } from './context/SinglePlayerContext';
 import { AuthContextProvider } from './context/AuthContext';
 import { GameModeProvider } from './context/GameModeContext';
+import { RankedMatchProvider } from './context/rankedMatchContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
       <GameProvider>
         <SinglePlayerProvider>
           <AuthContextProvider>
-            <App />
+            <RankedMatchProvider>
+              <App />
+            </RankedMatchProvider>
           </AuthContextProvider>
         </SinglePlayerProvider>
       </GameProvider>

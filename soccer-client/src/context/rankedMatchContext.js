@@ -59,9 +59,9 @@ export const RankedMatchProvider = ({ children }) => {
         score: state.score,
         error: state.error,
         startGame: () => startGame(dispatch, dispatchPlayer),
-        skipQuestion: () => skipQuestion(dispatch, dispatchPlayer),
-        verifyAnswer: (match_id, player_id) =>
-          verifyAnswer(dispatch, match_id, player_id, dispatchPlayer),
+        skipQuestion: () => skipQuestion(dispatch, dispatchPlayer, state.id_match),
+        verifyAnswer: (player_id) =>
+          verifyAnswer(dispatch, state.id_match, player_id, dispatchPlayer),
       }}
     >
       {children}

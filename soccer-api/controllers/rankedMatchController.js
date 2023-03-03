@@ -94,10 +94,10 @@ const skipRound = async (match_id) => {
     await RankedMatches.findByIdAndUpdate(Match.id, { $set: { skips: Match.skips - 1 } })
 
     const roundUpdated = await newRound(match_id)
-    const { currentRound, score, skips } = roundUpdated
+    const { currentRound, score, skips, started, finished } = roundUpdated
     const { options, info } = currentRound
 
-    return { options, info, id_match: roundUpdated._id, score, skips }
+    return { options, info, id_match: roundUpdated._id, score, skips, started, finished }
   } else {
     //return a error, showing to user that he does not have skips enough
   }
@@ -130,10 +130,10 @@ const verifyAnswer = async (match_id, player_id) => {
 
 
     const roundUpdated = await newRound(match_id)
-    const { currentRound, score, skips } = roundUpdated
+    const { currentRound, score, skips, started, finished } = roundUpdated
     const { options, info } = currentRound
 
-    return { options, info, id_match: roundUpdated._id, score, skips }
+    return { options, info, id_match: roundUpdated._id, score, skips, started, finished }
 
   } else {
     return Defeat(match_id)
@@ -196,10 +196,10 @@ export const startRankedMatch = async (req, res, next) => {
           console.log("done")
         }, 30000);
 
-        const { currentRound, score, skips } = savedMacth
+        const { currentRound, score, skips, started, finished } = savedMacth
         const { options, info } = currentRound
 
-        return res.status(200).json({ options, info, id_match: savedMacth._id, score, skips })
+        return res.status(200).json({ options, info, id_match: savedMacth._id, score, skips, started, finished })
 
       default:
         return res.status(200).json("please select a valid function")
