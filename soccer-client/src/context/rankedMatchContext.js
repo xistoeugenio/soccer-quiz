@@ -1,10 +1,11 @@
 import { createContext, useContext, useReducer } from "react";
-import { startGame, skipQuestion, verifyAnswer } from "../actions/actionsRankedMode";
+import { startGame, skipQuestion, verifyAnswer, timeIsOver } from "../actions/actionsRankedMode";
 import { SinglePlayerContext } from "./SinglePlayerContext";
 
 // Define action types as constants
 const SET_MATCH_DATA = "SET_MATCH_DATA";
 const SET_ERROR = "SET_ERROR";
+const TIME_OVER = "TIME_OVER"
 
 // Define initial state
 const initialState = {
@@ -32,6 +33,10 @@ const reducer = (state, action) => {
         skips: action.payload.skips,
         score: action.payload.score,
         error: null,
+      };
+    case TIME_OVER:
+      return {
+        finished: action.payload
       };
     case SET_ERROR:
       return { ...state, error: action.payload };
@@ -62,6 +67,7 @@ export const RankedMatchProvider = ({ children }) => {
         skipQuestion: () => skipQuestion(dispatch, dispatchPlayer, state.id_match),
         verifyAnswer: (player_id) =>
           verifyAnswer(dispatch, state.id_match, player_id, dispatchPlayer),
+        timeIsOver: () => timeIsOver(dispatch)
       }}
     >
       {children}

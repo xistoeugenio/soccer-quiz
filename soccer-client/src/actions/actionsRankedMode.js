@@ -46,6 +46,7 @@ export const verifyAnswer = async (dispatch, match_id, player_id, dispatchPlayer
     const {data} = await makeRequest.get(
       `/ranked?type_function=verify&match_id=${match_id}&player_id=${player_id}`
     );
+    console.log(data)
     dispatch({ type: "SET_MATCH_DATA", payload: data });
     dispatchPlayer({
       type: "NEW_PLAYER", payload: {
@@ -59,3 +60,7 @@ export const verifyAnswer = async (dispatch, match_id, player_id, dispatchPlayer
     dispatch({ type: "SET_ERROR", payload: error.message });
   }
 };
+
+export const timeIsOver = (dispatch)=>{
+  dispatch({ type: "TIME_OVER", payload: true });
+}
