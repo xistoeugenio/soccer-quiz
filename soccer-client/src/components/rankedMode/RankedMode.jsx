@@ -40,6 +40,22 @@ export default function RankedMode() {
     }
   }, [timeRemaining])
 
+  //this is responsible for preventing the player from exiting before the game ends
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (!finished) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [finished]);
+
   const initGame = async () => {
     startLoading()
     try {

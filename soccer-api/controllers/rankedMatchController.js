@@ -184,7 +184,7 @@ export const startRankedMatch = async (req, res, next) => {
           started: true,
           finished: false,
           score: 0,
-          skips: 20
+          skips: 3
         }
         const newMatch = new RankedMatches(MatchConfig)
         const savedMacth = await newMatch.save()
@@ -194,7 +194,7 @@ export const startRankedMatch = async (req, res, next) => {
           if (!currentMacth?.finished)
             Defeat(savedMacth.id)
           console.log("done")
-        }, 30000);
+        }, 62000);
 
         const { currentRound, score, skips, started, finished } = savedMacth
         const { options, info } = currentRound

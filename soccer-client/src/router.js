@@ -87,7 +87,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/ranked",
-    element: <RankedMode />
+    element:
+      <ProtectRouter>
+        <RankedMode />
+      </ProtectRouter>
   },
   {
     path: "/login",
