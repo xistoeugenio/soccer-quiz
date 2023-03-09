@@ -140,12 +140,12 @@ export default function RankedMode() {
                 }
               </div>
               <button
-                disabled={selectedAnswer && true}
+                disabled={(selectedAnswer && true) || (skips <= 0)}
                 className="skipButton"
                 onClick={() => { nextQuestion(true) }}>Skip({skips})</button>
             </>
             :
-            <Defeat />
+            <Defeat score={score}/>
       }
     </div>
   )

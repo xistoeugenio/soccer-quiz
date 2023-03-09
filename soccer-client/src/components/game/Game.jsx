@@ -164,7 +164,7 @@ export default function Game() {
                 onClick={() => { nextQuestion(true) }}>Skip</button>
             </>
             :
-            <Defeat />
+            <Defeat score={score}/>
       }
     </div>
   )

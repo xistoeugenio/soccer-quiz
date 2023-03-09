@@ -106,7 +106,7 @@ const skipRound = async (match_id) => {
 const Defeat = async (match_id) => {
   //change started and finished
   const Match = await RankedMatches.findById(match_id)
-  const { finished } = await RankedMatches.findByIdAndUpdate(
+  const { finished, score} = await RankedMatches.findByIdAndUpdate(
     Match.id, { $set: { finished: true, currentRound: [] } }, { new: true }
   )
   console.log("finished")
@@ -115,7 +115,7 @@ const Defeat = async (match_id) => {
   //
 
   //
-  return ({ finished })
+  return ({ finished, score })
 }
 
 const verifyAnswer = async (match_id, player_id) => {

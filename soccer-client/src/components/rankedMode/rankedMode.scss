@@ -145,6 +145,12 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
+    &:disabled{
+      background: #a5ddbb;
+      color: rgb(155, 140, 140);
+      cursor: not-allowed;
+    }
   }
 
   @include mobile {

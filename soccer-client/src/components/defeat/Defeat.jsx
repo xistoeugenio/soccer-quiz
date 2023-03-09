@@ -4,8 +4,7 @@ import { Link } from "react-router-dom"
 import './defeat.scss'
 
 
-export default function Defeat() {
-    const { score } = useContext(GameContext)
+export default function Defeat({score}) {
     return (
         <div className='defeat'>
             <div className="defeatContainer">
