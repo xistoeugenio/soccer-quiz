@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
 import { GameModeContext } from "../../context/GameModeContext"
 import { countries, listLeagues } from "../../dataPlayers"
 import "./gameMode.scss"
@@ -16,6 +17,8 @@ export default function GameMode() {
     chooseMode
   } = useContext(GameModeContext)
 
+  const { currentUser } = useContext(AuthContext)
+
   const navigate = useNavigate()
 
   console.log([...selectedLeagues, ...selectedCountries, mode])
@@ -30,7 +33,10 @@ export default function GameMode() {
         setShowCustom(true)
         chooseMode(mode)
         break;
-
+      case "ranked":
+        navigate("/ranked")
+        chooseMode(null)
+        break;
       default:
         navigate("/quiz")
         chooseMode(null)
@@ -53,7 +59,11 @@ export default function GameMode() {
   return (
     <div className="gameModeContainer">
       {!showCustom ? <div className="optionsMode">
-        <button className="defaultBtn" onClick={() => { changeMode() }}>Randon</button>
+        <button
+          onClick={() => { changeMode("ranked") }}
+          disabled={!currentUser ? true : false}
+        >Ranked mode</button>
+        <button className="defaultBtn" onClick={() => { changeMode() }}>Randon mode</button>
         <button className="brazilianBtn" onClick={() => { changeMode("brazilian") }}>Brazilian mode</button>
         <button className="customBtn" onClick={() => { changeMode("custom") }}>Custom mode</button>
       </div>

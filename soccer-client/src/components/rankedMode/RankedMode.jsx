@@ -8,7 +8,6 @@ import SkeletonContainer from "../skeletonContainer/SkeletonContainer"
 import "./rankedMode.scss"
 
 export default function RankedMode() {
-  const verify = true
 
   const {
     startGame,
@@ -17,18 +16,19 @@ export default function RankedMode() {
     timeIsOver,
     score,
     skips,
-    started,
     finished,
     options } = useContext(RankedMatchContext)
 
   //this hook is responsible to manage a state loading
-  const [loading1, startLoading, stopLoading] = useLoading()
-  const [loadingOption1, startLoadingOption, stopLoadingOption] = useLoading()
+  const [loading, startLoading, stopLoading] = useLoading()
+  const [loadingOption, startLoadingOption, stopLoadingOption] = useLoading()
   const [timeRemaining, setTimeRemaining] = useState(60)
 
   const [className, setClassName] = useState("playerButton")
   const [selectedAnswer, setSelectedAnswer] = useState(null)
 
+
+  //this is responsible to ends the game after 60 mins since it started
   useEffect(() => {
     if (timeRemaining === 0) {
       timeIsOver()
@@ -107,19 +107,20 @@ export default function RankedMode() {
   return (
     <div className="game">
       {
-        loading1 ?
+
+        loading ?
           <SkeletonContainer /> :
           !finished ?
             <>
-            <div className="header">
-              <div className="score">
-                <h1>score</h1>
-                <h2>{score}</h2>
+              <div className="header">
+                <div className="score">
+                  <h1>score</h1>
+                  <h2>{score}</h2>
+                </div>
+                <h2>{timeRemaining}</h2>
               </div>
-              <h2>{timeRemaining}</h2>
-            </div>
               <div className="gamerContainer">
-                {loadingOption1 ? <SkeletonContainer SingleOption /> :
+                {loadingOption ? <SkeletonContainer SingleOption /> :
                   <>
                     <div className="gamerLeft">
                       <BackCard />
@@ -145,7 +146,7 @@ export default function RankedMode() {
                 onClick={() => { nextQuestion(true) }}>Skip({skips})</button>
             </>
             :
-            <Defeat score={score}/>
+            <Defeat score={score} />
       }
     </div>
   )
