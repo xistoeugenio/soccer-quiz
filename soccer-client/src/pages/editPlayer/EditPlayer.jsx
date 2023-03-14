@@ -3,7 +3,7 @@ import { useState } from "react";
 import { leagues, countries, positions, listLeagues } from "../../dataPlayers";
 import { makeRequest } from "../../axios";
 import { CircularProgress } from "@mui/material";
-import "../addPlayer/addPlayer.scss"
+import "../../pages/addPlayer/addPlayer.scss"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext";
 import { useNavigate } from "react-router-dom";
 

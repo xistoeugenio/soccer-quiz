@@ -1,33 +1,24 @@
 import { createBrowserRouter, Link, Navigate } from "react-router-dom";
-import AddPlayer from "./components/addPlayer/AddPlayer";
-import EditPlayer from "./components/editPlayer/EditPlayer"
-import MainContainer from "./components/mainContainer/MainContainer";
-import Navbar, { SearchBar } from "./components/navbar/Navbar";
 import SearchResults from "./components/searchResults/SearchResults";
-import Game from "./components/game/Game";
 import "./app.scss";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+
+//importing pages
+import AddPlayer from "./pages/addPlayer/AddPlayer";
+import EditPlayer from "./pages/editPlayer/EditPlayer"
 import GameMode from "./pages/gameMode/GameMode";
 import AboutUs from "./pages/aboutUs/AboutUs";
-import RankedMode from "./components/rankedMode/RankedMode";
+import RankedMode from "./pages/rankedMode/RankedMode";
+import Game from "./pages/game/Game";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
+import InitialPage from "./pages/initialPage/InitialPage";
+import PlayersPage from "./pages/playersPage/PlayersPage";
 
-const InitialPage = () => (
-  <section className="PageContainer">
-    <Navbar />
-    <MainContainer />
-  </section>
-)
 
-const PlayersPage = () => (
-  <section className="PageContainer">
-    <SearchBar />
-    <MainContainer />
-  </section>
-)
-
+//this Protect router is responsible to protect 
+//some routers if the user is not logged in
 const ProtectRouter = ({ children }) => {
   const { currentUser } = useContext(AuthContext)
 
@@ -62,7 +53,7 @@ export const router = createBrowserRouter([
     element: <PlayersPage />,
     children: [
       {
-        path: "/players",
+        path: "/players/",
         element: <SearchResults />,
       },
     ],

@@ -36,6 +36,7 @@ const reducer = (state, action) => {
       };
     case TIME_OVER:
       return {
+        score: state.score,
         finished: action.payload
       };
     case SET_ERROR:

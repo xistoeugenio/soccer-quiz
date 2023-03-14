@@ -2,9 +2,9 @@ import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
 import { RankedMatchContext } from "../../context/rankedMatchContext"
 import useLoading from "../../hooks/useLoading"
-import BackCard from "../backCard/BackCard"
-import Defeat from "../defeat/Defeat"
-import SkeletonContainer from "../skeletonContainer/SkeletonContainer"
+import BackCard from "../../components/backCard/BackCard"
+import Defeat from "../../components/defeat/Defeat"
+import SkeletonContainer from "../../components/skeletonContainer/SkeletonContainer"
 import "./rankedMode.scss"
 
 export default function RankedMode() {

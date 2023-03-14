@@ -4,9 +4,9 @@ import { makeRequest } from "../../axios"
 import { GameContext } from "../../context/gameContext"
 import { GameModeContext } from "../../context/GameModeContext"
 import { SinglePlayerContext } from "../../context/SinglePlayerContext"
-import BackCard from "../backCard/BackCard"
-import Defeat from "../defeat/Defeat"
-import SkeletonContainer from "../skeletonContainer/SkeletonContainer"
+import BackCard from "../../components/backCard/BackCard"
+import Defeat from "../../components/defeat/Defeat"
+import SkeletonContainer from "../../components/skeletonContainer/SkeletonContainer"
 import "./game.scss"
 
 export default function Game() {
