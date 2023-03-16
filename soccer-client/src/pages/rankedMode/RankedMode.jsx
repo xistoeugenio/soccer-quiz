@@ -2,10 +2,10 @@ import { useRef, useState } from "react"
 import { useContext, useEffect } from "react"
 import { RankedMatchContext } from "../../context/rankedMatchContext"
 import useLoading from "../../hooks/useLoading"
-import BackCard from "../../components/backCard/BackCard"
 import Defeat from "../../components/defeat/Defeat"
 import SkeletonContainer from "../../components/skeletonContainer/SkeletonContainer"
 import "./rankedMode.scss"
+import QuestionInfo from "./components/questionInfo/QuestionInfo"
 
 export default function RankedMode() {
 
@@ -16,13 +16,12 @@ export default function RankedMode() {
     timeIsOver,
     score,
     skips,
-    finished,
-    options } = useContext(RankedMatchContext)
+    finished } = useContext(RankedMatchContext)
 
   //this hook is responsible to manage a state loading
   const [loading, startLoading, stopLoading] = useLoading()
   const [loadingOption, startLoadingOption, stopLoadingOption] = useLoading()
-  const [timeRemaining, setTimeRemaining] = useState(60)
+  const [timeRemaining, setTimeRemaining] = useState(1200)
 
   const [className, setClassName] = useState("playerButton")
   const [selectedAnswer, setSelectedAnswer] = useState(null)
@@ -31,14 +30,15 @@ export default function RankedMode() {
   //this is responsible to ends the game after 60 mins since it started
   useEffect(() => {
     if (timeRemaining === 0) {
-      timeIsOver()
-      return
+      //if there is a selected answer it'll wait until reiceive the backend response
+      if (!selectedAnswer)
+        timeIsOver()
     } else {
       setTimeout(() => {
         setTimeRemaining(timeRemaining - 1)
       }, 1000)
     }
-  }, [timeRemaining])
+  }, [timeRemaining, selectedAnswer])
 
   //this is responsible for preventing the player from exiting before the game ends
   useEffect(() => {
@@ -67,14 +67,13 @@ export default function RankedMode() {
   }
 
 
-  /*the function's job is to change question and the 
+  /*the function's hole is to change question and the 
   loading parameter is used when we want a loading page
   before the change*/
   const nextQuestion = async (loading) => {
     startLoadingOption()
     try {
       await skipQuestion()
-
       setSelectedAnswer(null)
     } catch (error) {
       console.log(error)
@@ -119,27 +118,12 @@ export default function RankedMode() {
                 </div>
                 <h2>{timeRemaining}</h2>
               </div>
-              <div className="gamerContainer">
-                {loadingOption ? <SkeletonContainer SingleOption /> :
-                  <>
-                    <div className="gamerLeft">
-                      <BackCard />
-                    </div>
-                    <div className="gamerRight">
-                      <div className={selectedAnswer ? "playersContainer clicked" : "playersContainer"}>
-                        {options?.map((player) => (
-                          <button
-                            key={player.id}
-                            disabled={selectedAnswer && true}
-                            className={selectedAnswer === player.id ? className : "playerButton"}
-                            onClick={() => { verifyQuestion(player.id) }}>{player.name}</button>
-                        ))}
-                      </div>
-
-                    </div>
-                  </>
-                }
-              </div>
+              <QuestionInfo
+                selectedAnswer={selectedAnswer}
+                loadingOption={loadingOption}
+                className={className}
+                verifyQuestion={verifyQuestion}
+              />
               <button
                 disabled={(selectedAnswer && true) || (skips <= 0)}
                 className="skipButton"

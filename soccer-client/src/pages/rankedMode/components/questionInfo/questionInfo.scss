@@ -1,0 +1,115 @@
+@import"../../../../global.scss";
+
+.QuestionInfoContainer {
+  width: 100%;
+  max-width: 650px;
+  height: calc(100% - 150px);
+  min-height: 340px;
+  max-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .infoPlayer {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .backCardContainer {
+      box-shadow: 0px 0px 13px 4px #473e3ebf;
+      -webkit-box-shadow: 0px 0px 13px 4px #473e3ebf;
+      -moz-box-shadow: 0px 0px 13px 4px #473e3ebf;
+    }
+
+  }
+
+  .questionOptions {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .playersContainer {
+      height: 80%;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      .playerButton {
+
+        width: 200px;
+        height: 40px;
+        background-color: #25c264;
+        color: rgb(36, 36, 36);
+        font-weight: 500;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+
+      &.clicked {
+        .playerButton {
+          background-color: #a5ddbb;
+          color: rgb(155, 140, 140);
+
+          &.selected {
+            background-color: #25c264;
+            color: white;
+          }
+
+          &.right {
+            background-color: green;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+    height: 75%;
+    max-height: 75%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .infoPlayer {
+      width: 220px;
+      min-width: 200px;
+      height: 300px;
+      min-height: 288px;
+
+      .backCardContainer {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .questionOptions {
+
+      height: calc(100% - 288px);
+      max-height: 200px;
+
+      .playersContainer {
+        width: 100%;
+        height: 100%;
+        justify-content: space-evenly;
+
+        .playerButton {
+          width: 220px;
+          height: 30px;
+        }
+      }
+    }
+
+  }
+}
+
+
